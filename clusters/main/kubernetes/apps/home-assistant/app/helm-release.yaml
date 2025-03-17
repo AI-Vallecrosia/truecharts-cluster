@@ -53,12 +53,12 @@ spec:
         enabled: true
         primary: true
         hosts:
-          - host: home-assistant.cloud.dev.local
+          - host: home-assistant.cloud.local
             paths:
               - path: /
         tls:
           - hosts:
-              - home-assistant.cloud.dev.local
+              - home-assistant.cloud.local
         integrations:
           traefik:
             enabled: true
