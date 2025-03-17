@@ -1,0 +1,71 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: frigate
+  namespace: frigate
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: frigate
+      version: 17.0.0
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 15m
+  timeout: 20m
+  maxHistory: 3
+  driftDetection:
+    mode: warn
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+
+  values:
+    credentials:
+      s3:
+        type: s3
+        url: "${S3_ENDPOINT}"
+        bucket: "${S3_BUCKET}"
+        accessKey: "${S3_ID}"
+        secretKey: "${S3_KEY}"
+        encrKey: "${S3_KEY}"
+    ingress:
+      main:
+        enabled: true
+        primary: true
+        hosts:
+          - host: frigate.cloud.local
+            paths:
+              - path: /
+        tls:
+          - hosts:
+              - frigate.cloud.local
+        integrations:
+          traefik:
+            enabled: true
+    persistence:
+      config:
+        volsync:
+          - name: config
+            type: restic
+            credentials: s3
+            dest:
+             enabled: true
+            src:
+              enabled: true
+      media:
+        enabled: true
+        type: nfs 
+        mountPath: /media
+        path: /mnt/DVR/Frigate-Recordings
+        server: "10.0.50.10"
