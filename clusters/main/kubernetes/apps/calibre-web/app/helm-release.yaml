@@ -61,12 +61,12 @@ spec:
           - host: "calibre.${DOMAIN_0}"
             paths:
               - path: /
-          - host: calibre.cloud.local
+          - host: calibre-web.cloud.local
             paths:
               - path: /
         tls:
           - hosts:
-              - calibre.cloud.ocal
+              - calibre-web.cloud.local
               - "calibre.${DOMAIN_0}"
         integrations:
           traefik:
