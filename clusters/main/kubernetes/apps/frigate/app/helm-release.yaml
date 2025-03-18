@@ -68,4 +68,4 @@ spec:
         type: nfs 
         mountPath: /media
         path: /mnt/DVR/Frigate-Recordings
-        server: "10.0.50.10"
+        server: "10.0.10.10"

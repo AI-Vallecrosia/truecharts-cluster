@@ -51,7 +51,7 @@ spec:
       music:
         type: nfs 
         path: /mnt/AI_Storage/Music
-        server: "10.0.50.10"
+        server: "10.0.10.10"
     ingress:
       main:
         enabled: true

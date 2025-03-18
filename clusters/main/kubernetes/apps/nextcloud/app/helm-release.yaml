@@ -120,8 +120,7 @@ spec:
       data:
         type: nfs 
         path: /mnt/AI_Storage/Nextcloud_storage
-        server: "10.0.50.10"
-        readOnly: true
+        server: "10.0.10.10"
         targetSelector:
           main:
             main:
