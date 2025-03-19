@@ -22,7 +22,7 @@ spec:
             name: longhorn-frontend
             port:
               number: 80
-  tls:
-    - hosts:
-      - longhorn.sys.cloud.local
-      secretName: longhorn-tls-0
+#  tls:
+#    - hosts:
+#      - longhorn.sys.cloud.local
+#      secretName: longhorn-tls-0
