@@ -77,15 +77,15 @@ spec:
       main:
         enabled: true
         hosts:
-          - host: "nextcloud.${DOMAIN_0}"
-            paths:
-              - path: /
+          #- host: "nextcloud.${DOMAIN_0}"
+          #  paths:
+          #    - path: /
           - host: nextcloud.cloud.local
             paths:
               - path: /
         tls:
           - hosts:
-              - "nextcloud.${DOMAIN_0}"
+            #- "nextcloud.${DOMAIN_0}"
               - nextcloud.cloud.local
         integrations:
           traefik:
