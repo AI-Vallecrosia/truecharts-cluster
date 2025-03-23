@@ -119,7 +119,7 @@ spec:
               enabled: true
       data:
         type: nfs 
-        path: /mnt/AI_Storage/Nextcloud_storage
+        path: /mnt/AI_Storage/Nextcloud-data
         server: "10.0.10.10"
         targetSelector:
           main:
