@@ -12,3 +12,4 @@ resources:
   - navidrome/ks.yaml
   - nextcloud/ks.yaml
   - wordpress/ks.yaml
+  - matomo/ks.yaml
