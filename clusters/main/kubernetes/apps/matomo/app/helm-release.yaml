@@ -73,12 +73,12 @@ spec:
         enabled: true
         primary: true
         hosts:
-          - host: matomo.cloud.dev.local
+          - host: matomo.cloud.local
             paths:
               - path: /
         tls:
           - hosts:
-              - matomo.cloud.dev.local
+              - matomo.cloud.local
         integrations:
           traefik:
             enabled: true
