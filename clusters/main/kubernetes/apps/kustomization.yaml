@@ -14,3 +14,4 @@ resources:
   - wordpress/ks.yaml
   - matomo/ks.yaml
   - odoo/ks.yaml
+  - wordpress-guests/ks.yaml
