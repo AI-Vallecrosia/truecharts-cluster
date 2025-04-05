@@ -53,7 +53,7 @@ spec:
         enabled: true
         primary: true
         hosts:
-          - host: spicyjewellery.it 
+          - host: www.spicyjewellery.it 
             paths: 
               - path: /
           - host: wordpress-don.cloud.local
@@ -61,7 +61,7 @@ spec:
               - path: /
         tls:
           - hosts:
-              - spicyjewellery.it
+              - www.spicyjewellery.it
               - wordpress-don.cloud.local
         integrations:
           traefik:
