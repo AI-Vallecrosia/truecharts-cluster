@@ -52,6 +52,7 @@ spec:
       wordpress:
         enabled: true
         primary: true
+        ingressClassName: internal
         hosts:
           - host: wordpress-sally.cloud.local
             paths:
@@ -59,6 +60,3 @@ spec:
         tls:
           - hosts:
               - wordpress-sally.cloud.local
-        integrations:
-          traefik:
-            enabled: true

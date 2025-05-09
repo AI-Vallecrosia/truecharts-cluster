@@ -52,6 +52,7 @@ spec:
       wordpress:
         enabled: true
         primary: true
+        ingressClassName: external
         hosts:
           - host: www.spicyjewellery.it 
             paths: 
@@ -63,6 +64,3 @@ spec:
           - hosts:
               - www.spicyjewellery.it
         #      - wordpress-don.cloud.local
-        integrations:
-          traefik:
-            enabled: true
