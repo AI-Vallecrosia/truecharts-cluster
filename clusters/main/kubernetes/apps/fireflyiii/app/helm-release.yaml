@@ -52,6 +52,7 @@ spec:
       main:
         enabled: true
         primary: true
+        ingressClassName: internal
         hosts:
           - host: fireflyiii.cloud.local
             paths:
@@ -59,6 +60,3 @@ spec:
         tls:
           - hosts:
               - fireflyiii.cloud.local
-        integrations:
-          traefik:
-            enabled: true

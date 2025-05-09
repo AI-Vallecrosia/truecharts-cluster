@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: kubernetes-dashboard
-      version: 1.13.2
+      version: 1.14.2
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -39,11 +39,9 @@ spec:
             port: 80
     ingress:
       main:
+        ingressClassName: internal
         enabled: true
         hosts:
           - host: dashboard.cloud.local
             paths:
               - path: /
-        integrations:
-          traefik:
-            enabled: true

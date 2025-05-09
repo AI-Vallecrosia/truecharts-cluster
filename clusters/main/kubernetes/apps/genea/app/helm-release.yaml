@@ -34,6 +34,7 @@ spec:
       genea:
         enabled: true
         primary: true
+        ingressClassName: external
         hosts:
           - host: "genea.${DOMAIN_0}"
             paths:
@@ -45,6 +46,3 @@ spec:
           - hosts:
               - "genea.${DOMAIN_0}"
               - genea.cloud.local
-        integrations:
-          traefik:
-            enabled: true

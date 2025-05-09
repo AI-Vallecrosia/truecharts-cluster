@@ -52,6 +52,7 @@ spec:
       main:
         enabled: true
         primary: true
+        ingressClassName: internal
         hosts:
           - host: home-assistant.cloud.local
             paths:
@@ -59,6 +60,3 @@ spec:
         tls:
           - hosts:
               - home-assistant.cloud.local
-        integrations:
-          traefik:
-            enabled: true

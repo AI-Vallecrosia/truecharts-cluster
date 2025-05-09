@@ -76,6 +76,7 @@ spec:
     ingress:
       main:
         enabled: true
+        ingressClassName: internal
         hosts:
           - host: "nextcloud.${DOMAIN_0}"
             paths:
@@ -87,9 +88,6 @@ spec:
           - hosts:
               - "nextcloud.${DOMAIN_0}"
             #  - nextcloud.cloud.local
-        integrations:
-          traefik:
-            enabled: true
     credentials:
       s3:
         type: s3

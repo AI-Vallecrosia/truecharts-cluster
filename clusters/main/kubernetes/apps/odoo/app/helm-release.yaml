@@ -69,6 +69,7 @@ spec:
       odoo:
         enabled: true
         primary: true
+        ingressClassName: internal
         hosts:
           - host: odoo.cloud.local
             paths:
@@ -76,6 +77,3 @@ spec:
         tls:
           - hosts:
               - odoo.cloud.local
-        integrations:
-          traefik:
-            enabled: true

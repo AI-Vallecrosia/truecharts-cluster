@@ -55,6 +55,7 @@ spec:
     ingress:
       main:
         enabled: true
+        ingressClassName: internal
         hosts:
           - host: "navidrome.${DOMAIN_0}"
             paths:
@@ -66,7 +67,3 @@ spec:
           - hosts:
               - "navidrome.${DOMAIN_0}"
               - navidrome.cloud.local
-        integrations:
-          traefik:
-            enabled: true
-   

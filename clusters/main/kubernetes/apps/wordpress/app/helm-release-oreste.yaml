@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: wordpress
-      version: 9.15.3
+      version: 9.15.4
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -52,6 +52,7 @@ spec:
       wordpress:
         enabled: true
         primary: true
+        ingressClassName: internal
         hosts:
           - host: wordpress-oreste.cloud.local
             paths:
@@ -59,6 +60,3 @@ spec:
         tls:
           - hosts:
               - wordpress-oreste.cloud.local
-        integrations:
-          traefik:
-            enabled: true
