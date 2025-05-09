@@ -36,7 +36,7 @@ spec:
         initailAdminPassword: adminpass
       general:
         default_phone_region: IT
-        accessIP: ${TRAEFIK_IP}
+        accessIP: ${NGINX_EXTERNAL_IP}
     
       clamav:
         enabled: true
