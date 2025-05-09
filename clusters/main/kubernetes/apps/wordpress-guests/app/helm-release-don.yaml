@@ -76,10 +76,10 @@ spec:
           - host: www.spicyjewellery.it 
             paths: 
               - path: /
-          #- host: wordpress-don.cloud.local
-           # paths:
-              #- path: /
+          - host: wordpress-don.cloud.local
+            paths:
+              - path: /
         tls:
           - hosts:
               - www.spicyjewellery.it
-        #      - wordpress-don.cloud.local
+              - wordpress-don.cloud.local
