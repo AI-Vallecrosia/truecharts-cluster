@@ -52,7 +52,7 @@ spec:
       wordpress:
         enabled: true
         primary: true
-        ingressClassName: external
+        ingressClassName: internal
         hosts:
           - host: www.casaebottega.it 
             paths: 
