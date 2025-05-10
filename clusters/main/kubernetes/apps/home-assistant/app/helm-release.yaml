@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: home-assistant
-      version: 27.3.2
+      version: 27.4.4
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -60,3 +60,6 @@ spec:
         tls:
           - hosts:
               - home-assistant.cloud.local
+        integrations:
+          traefik:
+            enabled: false

@@ -60,3 +60,6 @@ spec:
         tls:
           - hosts:
               - wordpress-sally.cloud.local
+        integrations:
+          traefik:
+            enabled: false

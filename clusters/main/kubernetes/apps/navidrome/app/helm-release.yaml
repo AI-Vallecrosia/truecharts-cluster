@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: navidrome
-      version: 21.8.0
+      version: 21.8.2
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -67,3 +67,6 @@ spec:
           - hosts:
               - "navidrome.${DOMAIN_0}"
               - navidrome.cloud.local
+        integrations:
+          traefik:
+            enabled: false

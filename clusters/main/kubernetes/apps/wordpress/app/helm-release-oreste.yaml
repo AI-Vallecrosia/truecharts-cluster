@@ -60,3 +60,6 @@ spec:
         tls:
           - hosts:
               - wordpress-oreste.cloud.local
+        integrations:
+          traefik:
+            enabled: false

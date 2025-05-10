@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: odoo
-      version: 20.3.7
+      version: 20.3.12
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -77,3 +77,6 @@ spec:
         tls:
           - hosts:
               - odoo.cloud.local
+        integrations:
+          traefik:
+            enabled: false

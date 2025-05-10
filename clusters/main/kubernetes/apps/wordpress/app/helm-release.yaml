@@ -83,3 +83,6 @@ spec:
           - hosts:
               - "www.${DOMAIN_0}"
               - wordpress.cloud.local
+        integrations:
+          traefik:
+            enabled: false

@@ -10,7 +10,7 @@ spec:
   chart:
     spec:
       chart: matomo
-      version: 15.16.2
+      version: 15.16.6
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -80,3 +80,6 @@ spec:
         tls:
           - hosts:
               - matomo.cloud.local
+        integrations:
+          traefik:
+            enabled: false

@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: fireflyiii
-      version: 28.0.3
+      version: 28.0.12
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -60,3 +60,6 @@ spec:
         tls:
           - hosts:
               - fireflyiii.cloud.local
+        integrations:
+          traefik:
+            enabled: false

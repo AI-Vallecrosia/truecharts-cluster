@@ -83,3 +83,6 @@ spec:
           - hosts:
               - www.spicyjewellery.it
               - wordpress-don.cloud.local
+        integrations:
+          traefik:
+            enabled: false

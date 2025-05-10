@@ -46,3 +46,6 @@ spec:
           - hosts:
               - "genea.${DOMAIN_0}"
               - genea.cloud.local
+        integrations:
+          traefik:
+            enabled: false

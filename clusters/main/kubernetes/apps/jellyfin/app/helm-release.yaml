@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: jellyfin
-      version: 20.6.12
+      version: 20.6.21
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -69,3 +69,6 @@ spec:
           - hosts:
               - "jellyfin.${DOMAIN_0}"
               - jellyfin.cloud.local
+        integrations:
+          traefik:
+            enabled: false
