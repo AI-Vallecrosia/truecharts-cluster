@@ -45,6 +45,7 @@ spec:
          - host: dashboard.cloud.local
            paths:
              - path: /
-        traefik:
-          enabled: false
+        integrations:
+          traefik:
+            enabled: false
 
