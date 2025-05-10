@@ -64,6 +64,6 @@ spec:
           - hosts:
               - www.casaebottega.it
               - wordpress-casaebottega.cloud.local
-      integrations:
-        traefik:
-          enabled: false
+        integrations:
+          traefik:
+            enabled: false
