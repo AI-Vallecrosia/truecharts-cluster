@@ -46,5 +46,5 @@ spec:
            paths:
              - path: /
         traefik:
-          ebled: false
+          enabled: false
 
