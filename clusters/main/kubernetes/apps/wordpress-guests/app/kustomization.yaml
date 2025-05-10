@@ -4,3 +4,4 @@ resources:
   - namespace.yaml
   - helm-release-sally.yaml
   - helm-release-don.yaml
+  - helm-release-casaebottega.yaml
