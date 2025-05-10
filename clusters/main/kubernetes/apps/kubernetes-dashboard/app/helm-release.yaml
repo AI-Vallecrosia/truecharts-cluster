@@ -37,11 +37,14 @@ spec:
         ports:
           main:
             port: 80
-    # ingress:
-    #   main:
-    #     ingressClassName: internal
-    #     enabled: true
-    #     hosts:
-    #       - host: dashboard.cloud.local
-    #         paths:
-    #           - path: /
+    ingress:
+      main:
+        ingressClassName: internal
+        enabled: true
+        hosts:
+         - host: dashboard.cloud.local
+           paths:
+             - path: /
+        traefik:
+          ebled: false
+
