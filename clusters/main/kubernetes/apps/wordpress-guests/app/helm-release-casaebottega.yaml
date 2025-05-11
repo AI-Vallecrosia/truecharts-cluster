@@ -61,9 +61,9 @@ spec:
       wordpress:
         enabled: true
         primary: true
-        ingressClassName: internal
+        ingressClassName: external
         hosts:
-          - host: www.casaebottega.it 
+          - host: casaebottega.aivallecrosia.com 
             paths: 
               - path: /
           - host: wordpress-casaebottega.cloud.local
@@ -71,7 +71,7 @@ spec:
               - path: /
         tls:
           - hosts:
-              - www.casaebottega.it
+              - casaebottega.aivallecrosia.com
               - wordpress-casaebottega.cloud.local
         integrations:
           traefik:
