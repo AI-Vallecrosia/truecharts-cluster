@@ -39,6 +39,9 @@ spec:
         accessKey: "${S3_ID}"
         secretKey: "${S3_KEY}"
         encrKey: "${S3_KEY}"
+    service:
+      main:
+        enabled: true
     ingress:
       main:
         enabled: true
