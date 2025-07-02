@@ -41,8 +41,6 @@ spec:
         encrKey: "${S3_KEY}"
     ingress:
       main:
-        enabled: true
-        primary: true
         ingressClassName: internal
         hosts:
           - host: frigate.cloud.local
