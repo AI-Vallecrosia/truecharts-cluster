@@ -31,6 +31,18 @@ spec:
     keepHistory: false
 
   values:
+    frigateConfig:
+      mqtt:
+        enabled: False
+      cameras:
+        dummy:
+          enabled: False
+          ffmpeg:
+            inputs:
+              - path: rtsp://127.0.0.1:554/rtsp
+                roles:
+                  - detect
+
     credentials:
       s3:
         type: s3
