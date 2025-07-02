@@ -54,6 +54,9 @@ spec:
     service:
       main:
         enabled: true
+        type: LoadBalancer
+        loadBalancerIP: 10.0.10.66
+      
     ingress:
       main:
         enabled: true
