@@ -39,7 +39,7 @@ spec:
           enabled: False
           ffmpeg:
             inputs:
-              - path: "rtsp://CAMERAS_USR:CAMERAS_PSWD@CAMERA_INGRESSO_IP/streaming/channels/102"
+              - path: "rtsp://${CAMERAS_USR}:${CAMERAS_PSWD}@${CAMERA_INGRESSO_IP}/streaming/channels/102"
                 roles:
                   - detect
 
