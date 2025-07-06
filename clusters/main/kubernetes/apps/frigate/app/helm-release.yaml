@@ -31,6 +31,16 @@ spec:
     keepHistory: false
 
   values:
+    workload:
+      main:
+        podSpec:
+          containers:
+            frigate: 
+              env:
+                CAMERAS_USR: "${CAMERAS_USR}"
+                CAMERAS_PSWD: "${CAMERAS_PSWD}"
+                CAMERA_INGRESSO_IP: "${CAMERA_INGRESSO_IP}"
+
     frigateConfig:
       mqtt:
         enabled: False
