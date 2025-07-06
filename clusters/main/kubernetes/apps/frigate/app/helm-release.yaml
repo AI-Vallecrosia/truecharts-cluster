@@ -42,6 +42,11 @@ spec:
               - path: "rtsp://${CAMERAS_USR}:${CAMERAS_PSWD}@${CAMERA_INGRESSO_IP}/streaming/channels/102"
                 roles:
                   - detect
+              - path: "rtsp://${CAMERAS_USR}:${CAMERAS_PSWD}@${CAMERA_INGRESSO_IP}/streaming/channels/101"
+                roles:
+                  - detect
+          detect:
+            enabled: false
 
     credentials:
       s3:
