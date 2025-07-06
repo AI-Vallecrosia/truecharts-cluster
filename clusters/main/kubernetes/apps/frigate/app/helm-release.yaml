@@ -31,17 +31,6 @@ spec:
     keepHistory: false
 
   values:
-    workload:
-      main:
-        podSpec:
-          containers:
-            frigate:
-              enabled: true
-              env:
-                CAMERAS_USR: "${CAMERAS_USR}"
-                CAMERAS_PSWD: "${CAMERAS_PSWD}"
-                CAMERA_INGRESSO_IP: "${CAMERA_INGRESSO_IP}"
-
     frigateConfig:
       mqtt:
         enabled: False
@@ -50,7 +39,7 @@ spec:
           enabled: False
           ffmpeg:
             inputs:
-              - path: "rtsp://${CAMERAS_USR}:${CAMERAS_PSWD}@${CAMERA_INGRESSO_IP}/streaming/channels/102"
+              - path: "rtsp://CAMERAS_USR:CAMERAS_PSWD@CAMERA_INGRESSO_IP/streaming/channels/102"
                 roles:
                   - detect
 
