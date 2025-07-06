@@ -35,18 +35,50 @@ spec:
       mqtt:
         enabled: False
       cameras:
-        ingresso:
+        ufficio:
           enabled: True
           ffmpeg:
             inputs:
-              #- path: "rtsp://${CAMERAS_USR}:${CAMERAS_PSWD}@${CAMERA_INGRESSO_IP}/streaming/channels/102"
-              #  roles:
-              #    - detect
-              - path: "rtsp://${CAMERAS_USR}:${CAMERAS_PSWD}@${CAMERA_INGRESSO_IP}/streaming/channels/101"
+              - path: "rtsp://${CAMERA_UFFICIO_USR}:${CAMERA_UFFICIO_PSWD}@${CAMERA_UFFICIO_IP}/streaming/channels/101"
+                roles:
+                  - record
+              - path: "rtsp://${CAMERA_UFFICIO_USR}:${CAMERA_UFFICIO_PSWD}@${CAMERA_UFFICIO_IP}/streaming/channels/102"
                 roles:
                   - detect
           detect:
-            enabled: false
+            width: 640
+            height: 360
+          onvif:
+            host: "${CAMERA_UFFICIO_IP}"
+            port: 8000
+            user: "${CAMERA_UFFICIO_USR_ONVIF}"
+            password: "${CAMERA_UFFICIO_PSWD_ONVIF}"
+          motion:
+            mask:
+              - 0.298,0.049,0.299,0.097,0.313,0.099,0.312,0.056
+              - 0.56,0.316,0.575,0.005,0.922,0.004,0.841,0.498
+          record:
+            enabled: true
+            retain:
+              days: 7
+              mode: motion
+            events:
+              pre_capture: 5
+              post_capture: 120
+              retain:
+                default: 14
+                mode: active_objects
+                objects:
+                  person: 14
+      version: 0.14
+      birdseye:
+        enabled: True
+        mode: continuous
+      camera_groups:
+        AI_Vallecrosia:
+          order: 1
+          icon: LuApple
+          cameras: ufficio
 
     credentials:
       s3:
