@@ -35,11 +35,11 @@ spec:
       mqtt:
         enabled: False
       cameras:
-        dummy:
+        ingresso:
           enabled: False
           ffmpeg:
             inputs:
-              - path: rtsp://127.0.0.1:554/rtsp
+              - path: "rtsp://${CAMERAS_USR}:${CAMERAS_PSWD}@${CAMERA_INGRESSO_IP}/streaming/channels/102"
                 roles:
                   - detect
 
