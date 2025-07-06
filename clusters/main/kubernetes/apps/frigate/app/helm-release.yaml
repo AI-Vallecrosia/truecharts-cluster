@@ -36,7 +36,7 @@ spec:
         enabled: False
       cameras:
         ingresso:
-          enabled: False
+          enabled: True
           ffmpeg:
             inputs:
               - path: "rtsp://${CAMERAS_USR}:${CAMERAS_PSWD}@${CAMERA_INGRESSO_IP}/streaming/channels/102"
