@@ -68,10 +68,10 @@ spec:
                 roles:
                   - detect
       record:
-          enabled: true
-          retain:
-            days: 7
-            mode: motion
+        enabled: true
+        retain:
+          days: 7
+          mode: motion
       birdseye:
         enabled: True
         mode: continuous
