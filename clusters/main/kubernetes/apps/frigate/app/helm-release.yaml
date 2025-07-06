@@ -62,15 +62,16 @@ spec:
             retain:
               days: 7
               mode: motion
-            events:
-              pre_capture: 5
-              post_capture: 120
-              retain:
-                default: 14
-                mode: active_objects
-                objects:
-                  person: 14
-      version: 0.14
+        citofono:
+          enabled: True
+          ffmpeg:
+            inputs:
+              - path: "rtsp://${CAMERA_CITOFONO_USR}:${CAMERA_CITOFONO_PSWD}@${CAMERA_CITOFONO_IP}/streaming/channels/101"
+                roles:
+                  - record
+              - path: "rtsp://${CAMERA_CITOFONO_USR}:${CAMERA_CITOFONO_PSWD}@${CAMERA_CITOFONO_IP}/streaming/channels/102"
+                roles:
+                  - detect
       birdseye:
         enabled: True
         mode: continuous
