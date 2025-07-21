@@ -66,16 +66,12 @@ spec:
           - host: www.ristocasaebottega.it
             paths: 
               - path: /
-          - host: casaebottega.aivallecrosia.com 
-            paths: 
-              - path: /
           - host: wordpress-casaebottega.cloud.local
             paths:
               - path: /
         tls:
           - hosts:
               - www.ristocasaebottega.it
-              - casaebottega.aivallecrosia.com
               - wordpress-casaebottega.cloud.local
         integrations:
           traefik:
