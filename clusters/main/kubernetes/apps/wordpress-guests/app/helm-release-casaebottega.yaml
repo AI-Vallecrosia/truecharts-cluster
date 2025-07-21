@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: wordpress
-      version: 9.17.0
+      version: 9.16.5
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -63,6 +63,9 @@ spec:
         primary: true
         ingressClassName: external
         hosts:
+          - host: www.ristocasaebottega.it
+            paths: 
+              - path: /
           - host: casaebottega.aivallecrosia.com 
             paths: 
               - path: /
@@ -71,6 +74,7 @@ spec:
               - path: /
         tls:
           - hosts:
+              - www.ristocasaebottega.it
               - casaebottega.aivallecrosia.com
               - wordpress-casaebottega.cloud.local
         integrations:
