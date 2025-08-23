@@ -40,7 +40,7 @@ spec:
         pm_max_spare_servers: 90
       credentials:
         initialAdminUser: admin
-        initailAdminPassword: adminpass
+        initialAdminPassword: adminpass
       general:
         default_phone_region: IT
         #accessIP: ${NGINX_EXTERNAL_IP}
