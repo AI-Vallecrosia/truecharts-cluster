@@ -35,6 +35,28 @@ spec:
       mqtt:
         enabled: False
       cameras:
+        magazzino:
+          enabled: True
+          ffmpeg:
+            inputs:
+              - path: "rtsp://${CAMERA_MAGAZZINO_USR}:${CAMERA_MAGAZZINO_PSWD}@${CAMERA_MAGAZZINO_IP}/streaming/channels/101"
+                roles:
+                  - record
+              - path: "rtsp://${CAMERA_MAGAZZINO_USR}:${CAMERA_MAGAZZINO_PSWD}@${CAMERA_MAGAZZINO_IP}/streaming/channels/102"
+                roles:
+                  - detect
+          detect:
+            width: 640
+            height: 360
+          onvif:
+            host: "${CAMERA_MAGAZZINO_IP}"
+            port: 8000
+            user: "${CAMERA_MAGAZZINO_USR_ONVIF}"
+            password: "${CAMERA_MAGAZZINO_PSWD_ONVIF}"
+          motion:
+            mask:
+              - 0.298,0.049,0.299,0.097,0.313,0.099,0.312,0.056
+              - 0.56,0.316,0.575,0.005,0.922,0.004,0.841,0.498 
         ufficio:
           enabled: True
           ffmpeg:
@@ -53,10 +75,6 @@ spec:
             port: 8000
             user: "${CAMERA_UFFICIO_USR_ONVIF}"
             password: "${CAMERA_UFFICIO_PSWD_ONVIF}"
-          motion:
-            mask:
-              - 0.298,0.049,0.299,0.097,0.313,0.099,0.312,0.056
-              - 0.56,0.316,0.575,0.005,0.922,0.004,0.841,0.498 
         citofono:
           enabled: True
           ffmpeg:
