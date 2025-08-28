@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: frigate
-      version: 18.5.2
+      version: 17.0.1
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -53,10 +53,6 @@ spec:
             port: 8000
             user: "${CAMERA_MAGAZZINO_USR_ONVIF}"
             password: "${CAMERA_MAGAZZINO_PSWD_ONVIF}"
-          motion:
-            mask:
-              - 0.298,0.049,0.299,0.097,0.313,0.099,0.312,0.056
-              - 0.56,0.316,0.575,0.005,0.922,0.004,0.841,0.498 
         ufficio:
           enabled: True
           ffmpeg:
