@@ -48,11 +48,11 @@ spec:
           detect:
             width: 640
             height: 360
-          onvif:
-            host: "${CAMERA_MAGAZZINO_IP}"
-            port: 8000
-            user: "${CAMERA_MAGAZZINO_USR_ONVIF}"
-            password: "${CAMERA_MAGAZZINO_PSWD_ONVIF}"
+#          onvif:
+#            host: "${CAMERA_MAGAZZINO_IP}"
+#            port: 8000
+#            user: "${CAMERA_MAGAZZINO_USR_ONVIF}"
+#            password: "${CAMERA_MAGAZZINO_PSWD_ONVIF}"
         ufficio:
           enabled: True
           ffmpeg:
