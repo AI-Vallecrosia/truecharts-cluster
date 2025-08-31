@@ -38,6 +38,7 @@ spec:
           containers:
             main:
               env:
+                RENOVATE_CONFIG_FILE: /config/renovate-config.json
                 GITHUB_COM_TOKEN: '${GITHUB_RENOVATE_PAT}'
                 RENOVATE_TOKEN: '${GITHUB_RENOVATE_PAT}'
 
@@ -45,8 +46,8 @@ spec:
     configmap:
       config:
         data:
-          renovate-config.js: |-
+          renovate-config.json: |-
             {
               'repositories': ['AI-Vallecrosia/truecharts-cluster'],
-              'dryRun': 'full'
+              'dryRun': 'full',
             }
