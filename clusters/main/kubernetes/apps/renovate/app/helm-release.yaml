@@ -48,7 +48,7 @@ spec:
         data:
           renovate-config.json: |-
             {
-              'repositories': ['AI-Vallecrosia/truecharts-cluster'],
+              'repositories': ['truecharts/public'],
               'dryRun': 'full',
             }
     persistence:
