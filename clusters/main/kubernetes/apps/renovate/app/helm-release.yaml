@@ -47,6 +47,6 @@ spec:
         data:
           renovate-config.js: |-
             {
-              "repositories": ["AI-Vallecrosia/truecharts-cluster"],
-              "dryRun": "full"
+              'repositories': ['AI-Vallecrosia/truecharts-cluster'],
+              'dryRun': 'full'
             }
