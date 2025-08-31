@@ -40,3 +40,13 @@ spec:
               env:
                 GITHUB_COM_TOKEN: '${GITHUB_RENOVATE_PAT}'
                 RENOVATE_TOKEN: '${GITHUB_RENOVATE_PAT}'
+
+    
+    configmap:
+      config:
+        data:
+          renovate-config.js: |-
+            {
+              "repositories": ["AI-Vallecrosia/truecharts-cluster"],
+              "dryRun": "full"
+            }
