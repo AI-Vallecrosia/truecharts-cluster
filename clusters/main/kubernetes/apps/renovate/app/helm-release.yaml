@@ -51,3 +51,8 @@ spec:
               'repositories': ['AI-Vallecrosia/truecharts-cluster'],
               'dryRun': 'full',
             }
+    persistence:
+      configmap-vol:
+        items:
+          - key: renovate-config.json
+            path: renovate-config.json
