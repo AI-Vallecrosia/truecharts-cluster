@@ -43,24 +43,24 @@ spec:
       mqtt:
         enabled: False
       cameras:
-        magazzino:
+        magazzino_ext:
           enabled: True
           ffmpeg:
             inputs:
-              - path: "rtsp://${CAMERA_MAGAZZINO_USR}:${CAMERA_MAGAZZINO_PSWD}@${CAMERA_MAGAZZINO_IP}/streaming/channels/101"
+              - path: "rtsp://${CAMERA_MAGAZZINO_EXT_USR}:${CAMERA_MAGAZZINO_EXT_PSWD}@${CAMERA_MAGAZZINO_EXT_IP}/streaming/channels/101"
                 roles:
                   - record
-              - path: "rtsp://${CAMERA_MAGAZZINO_USR}:${CAMERA_MAGAZZINO_PSWD}@${CAMERA_MAGAZZINO_IP}/streaming/channels/102"
+              - path: "rtsp://${CAMERA_MAGAZZINO_EXT_USR}:${CAMERA_MAGAZZINO_EXT_PSWD}@${CAMERA_MAGAZZINO_EXT_IP}/streaming/channels/102"
                 roles:
                   - detect
           detect:
             width: 640
             height: 360
           onvif:
-            host: "${CAMERA_MAGAZZINO_IP}"
+            host: "${CAMERA_MAGAZZINO_EXT_IP}"
             port: 8000
-            user: "${CAMERA_MAGAZZINO_USR_ONVIF}"
-            password: "${CAMERA_MAGAZZINO_PSWD_ONVIF}"
+            user: "${CAMERA_MAGAZZINO_EXT_USR_ONVIF}"
+            password: "${CAMERA_MAGAZZINO_EXT_PSWD_ONVIF}"
         ufficio:
           enabled: True
           ffmpeg:
@@ -89,6 +89,26 @@ spec:
               - path: "rtsp://${CAMERA_CITOFONO_USR}:${CAMERA_CITOFONO_PSWD}@${CAMERA_CITOFONO_IP}/streaming/channels/102"
                 roles:
                   - detect
+        magazzino_int:
+          enabled: true
+          ffmpeg:
+            inputs:
+              - path: "rtsp://${CAMERA_MAGAZZINO_INT_USR}:${CAMERA_MAGAZZINO_INT_PSWD}@${CAMERA_MAGAZZINO_INT_IP}:554/h265Preview_01_main"
+                input_args: preset-rtsp-generic
+                roles:
+                  - record
+              - path: "rtsp://${CAMERA_MAGAZZINO_INT_USR}:${CAMERA_MAGAZZINO_INT_PSWD}@${CAMERA_MAGAZZINO_INT_IP}:554/h265Preview_01_sub"
+                input_args: preset-rtsp-generic
+                roles:
+                  - detect
+          detect:
+            width: 640
+            height: 360
+          onvif:
+            host: "${CAMERA_MAGAZZINO_INT_IP}"
+            port: 8000
+            user: "${CAMERA_MAGAZZINO_INT_USR_ONVIF}"
+            password: "${CAMERA_MAGAZZINO_INT_PSWD_ONVIF}"
       record:
         enabled: true
         retain:
