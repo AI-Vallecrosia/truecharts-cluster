@@ -49,7 +49,7 @@ spec:
           renovate-config.json: |-
             {
               'repositories': ['AI-Vallecrosia/truecharts-cluster'],
-              'dryRun': 'full',
+              'dryRun': 'lookup',
             }
     persistence:
       configmap-vol:
