@@ -30,6 +30,10 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    cnpg:
+      persistence:
+        main:
+          size: 50G
     nextcloud:
       php:
         memory_limit: 3G
