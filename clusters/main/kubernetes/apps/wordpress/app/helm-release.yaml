@@ -50,7 +50,7 @@ spec:
       persistence:
         tmp: 
           type: nfs
-          path: /mnt/AI_SSD/recovery_backup
+          path: /mnt/AI_SSD/recover_backup
           server: "10.0.10.10"
           
         data: 
