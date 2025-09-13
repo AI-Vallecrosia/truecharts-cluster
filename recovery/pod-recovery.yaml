@@ -1,0 +1,173 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    checksum/cnpg: 2291fc448ae81adfd860632d73e38ffc039fc25959ede77cf692f754199383ee
+    checksum/configmaps: 2f70d6807f093247fad96153a9c6c0d57b4aa02789e19be1b9c088c65f4e2d07
+    checksum/mariadb: 09c85576cb45b1eecd1467732b11ea8fa3363b0105c465f02a6ad64991521d52
+    checksum/mongodb: 09c85576cb45b1eecd1467732b11ea8fa3363b0105c465f02a6ad64991521d52
+    checksum/persistence: f427844ed71b13c2c5f306914c72564417f5e4e034a44824eb97dc5f3916167f
+    checksum/redis: 013343a028cbb3f7e08f4ba7522702dd98e52632c688641074b0b1db3df29894
+    checksum/secrets: 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
+    checksum/services: 3c1dd612ec74ee9e0f9d1999416f52f56037e0b49ff3a1234059de4203563ec5
+    checksum/solr: 29c14feeaddbf7762052db593898d274941f539cee681ddc613957587686f347
+  creationTimestamp: "2025-09-12T19:27:27Z"
+  labels:
+    app: mariadb-15.10.0
+    app.kubernetes.io/instance: wordpress
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: mariadb
+    app.kubernetes.io/version: 11.8.2
+    helm-revision: "5"
+    helm.sh/chart: mariadb-15.10.0
+    pod-template-hash: 8569b7898c
+    pod.lifecycle: permanent
+    pod.name: main
+    release: wordpress
+  name: wordpress-mariadb-recovery
+  namespace: wordpress
+spec:
+  automountServiceAccountToken: false
+  containers:
+  - env:
+    - name: TZ
+      value: UTC
+    - name: UMASK
+      value: "0022"
+    - name: UMASK_SET
+      value: "0022"
+    - name: NVIDIA_VISIBLE_DEVICES
+      value: void
+    - name: PUID
+      value: "568"
+    - name: USER_ID
+      value: "568"
+    - name: UID
+      value: "568"
+    - name: PGID
+      value: "568"
+    - name: GROUP_ID
+      value: "568"
+    - name: GID
+      value: "568"
+    - name: MARIADB_DATABASE
+      value: wordpress
+    - name: MARIADB_EXTRA_FLAGS
+      value: --init-file=/init/passinit.sql
+    - name: MARIADB_PASSWORD
+      value: PLACEHOLDERPASSWORD
+    - name: MARIADB_ROOT_PASSWORD
+      value: PLACEHOLDERROOTPASSWORD
+    - name: MARIADB_USER
+      value: wordpress
+    image: public.ecr.aws/bitnami/mariadb:11.8.2@sha256:450dff344e2dafaf87de1356c6decc223c170bec6810b3477881364a3ccde7f2
+    imagePullPolicy: IfNotPresent
+    livenessProbe:
+      exec:
+        command:
+        - /bin/bash
+        - -ec
+        - until /opt/bitnami/scripts/mariadb/healthcheck.sh; do sleep 2; done
+      failureThreshold: 5
+      initialDelaySeconds: 12
+      periodSeconds: 15
+      successThreshold: 1
+      timeoutSeconds: 5
+    name: wordpress-mariadb
+    ports:
+    - containerPort: 3306
+      name: main
+      protocol: TCP
+    resources:
+      limits:
+        cpu: "4"
+        memory: 8Gi
+      requests:
+        cpu: 10m
+        memory: 50Mi
+    securityContext:
+      allowPrivilegeEscalation: true
+      privileged: false
+      readOnlyRootFilesystem: false
+      runAsGroup: 0
+      runAsNonRoot: false
+      runAsUser: 0
+      seccompProfile:
+        type: RuntimeDefault
+    startupProbe:
+      exec:
+        command:
+        - /bin/bash
+        - -ec
+        - until /opt/bitnami/scripts/mariadb/healthcheck.sh; do sleep 2; done
+      failureThreshold: 60
+      initialDelaySeconds: 10
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 3
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /bitnami/mariadb
+      name: data
+    - mountPath: /dev/shm
+      name: devshm
+    - mountPath: /init/passinit.sql
+      name: passinit
+      subPath: passinit.sql
+    - mountPath: /shared
+      name: shared
+    - mountPath: /tmp
+      name: tmp
+    - mountPath: /var/logs
+      name: varlogs
+    - mountPath: /var/run
+      name: varrun
+  dnsConfig:
+    options:
+    - name: ndots
+      value: "1"
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: false
+  nodeName: k8s-control-1
+  nodeSelector:
+    kubernetes.io/arch: amd64
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    fsGroup: 0
+    fsGroupChangePolicy: OnRootMismatch
+    supplementalGroups:
+    - 0
+  volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: wordpress-mariadb-data
+  - emptyDir:
+      medium: Memory
+      sizeLimit: 8Gi
+    name: devshm
+  - configMap:
+      defaultMode: 420
+      items:
+      - key: passinit.sql
+        path: passinit.sql
+      name: wordpress-mariadb-passinit
+      optional: false
+    name: passinit
+  - emptyDir: {}
+    name: shared
+  - emptyDir:
+      medium: Memory
+      sizeLimit: 8Gi
+    name: tmp
+  - emptyDir:
+      medium: Memory
+      sizeLimit: 8Gi
+    name: varlogs
+  - emptyDir:
+      medium: Memory
+      sizeLimit: 8Gi
+    name: varrun
