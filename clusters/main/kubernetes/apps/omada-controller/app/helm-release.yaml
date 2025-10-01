@@ -59,7 +59,7 @@ spec:
             src:
               enabled: true
     ingress:
-      comm:
+      main:
         enabled: true
         primary: true
         ingressClassName: internal
