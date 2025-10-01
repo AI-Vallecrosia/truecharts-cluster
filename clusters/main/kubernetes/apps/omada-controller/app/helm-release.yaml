@@ -2,15 +2,15 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: odoo
-  namespace: odoo
+  name: omada-controller
+  namespace: omada-controller
 
 spec:
   interval: 15m
   chart:
     spec:
-      chart: odoo
-      version: 20.3.17
+      chart: omada-controller
+      version: 17.7.2
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -40,43 +40,35 @@ spec:
         secretKey: "${S3_KEY}"
         encrKey: "${S3_KEY}"
     persistence:
-      odoo:
+      data:
         volsync:
-          - name: odoo
+          - name: data
             type: restic
             credentials: s3
             dest:
              enabled: true
             src:
               enabled: true
-      addons:
+      work:
         volsync:
-          - name: addons
+          - name: work
             type: restic
             credentials: s3
             dest:
              enabled: true
             src:
               enabled: true
-    cnpg:
-      main:
-        backups:
-          enabled: true
-          credentials: s3
-        recovery:
-          credentials: s3
     ingress:
-      odoo:
+      comm:
         enabled: true
-        primary: true
         ingressClassName: internal
         hosts:
-          - host: odoo.cloud.local
+          - host: omada-controller.cloud.local
             paths:
               - path: /
         tls:
           - hosts:
-              - odoo.cloud.local
+              - omada-controller.cloud.local
         integrations:
           traefik:
             enabled: false
