@@ -61,6 +61,7 @@ spec:
     ingress:
       comm:
         enabled: true
+        primary: true
         ingressClassName: internal
         hosts:
           - host: omada-controller.cloud.local
