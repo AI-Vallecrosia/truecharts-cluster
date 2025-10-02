@@ -31,9 +31,9 @@ spec:
     keepHistory: false
   values:
     php-config:
-      PHP_DEFAULT_MEMORY_LIMIT: "2048M"
-      PHP_DEFAULT_POST_MAX_SIZE: "2048M"
-      PHP_DEFAULT_UPLOAD_MAX_FILESIZE: "2048M"
+      PHP_MEMORY_LIMIT: "2048M"
+      PHP_POST_MAX_SIZE: "2048M"
+      PHP_UPLOAD_MAX_FILESIZE: "2048M"
     credentials:
       s3:
         type: s3
