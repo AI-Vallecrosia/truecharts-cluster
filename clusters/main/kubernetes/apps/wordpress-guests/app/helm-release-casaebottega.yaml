@@ -43,6 +43,12 @@ spec:
         secretKey: "${S3_KEY}"
         encrKey: "${S3_KEY}"
     persistence:
+      tmp:
+        mountPath: /tmp
+        enabled: true
+        type: nfs 
+        path: /mnt/AI_SSD/recover_backup
+        server: "10.0.10.10"
       config:
         volsync:
           - name: config
