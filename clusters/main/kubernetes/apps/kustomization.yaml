@@ -16,4 +16,4 @@ resources:
   - odoo/ks.yaml
   - wordpress-guests/ks.yaml
   - renovate/ks.yaml
-  - omada-controller/ks.yaml
+  #- omada-controller/ks.yaml
