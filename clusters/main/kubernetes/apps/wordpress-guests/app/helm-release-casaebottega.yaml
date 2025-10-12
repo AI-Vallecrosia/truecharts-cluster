@@ -30,15 +30,19 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    workload:
-      main:
-        podSpec:
-          containers:
-            main:
-              env:
-                PHP_DEFAULT_MEMORY_LIMIT: "2048M"
-                PHP_DEFAULT_POST_MAX_SIZE: "2048M"
-                PHP_DEFAULT_UPLOAD_MAX_FILESIZE: "2048M"
+    mariadb:
+      persistence:
+        tmp:
+          mountPath: /tmp
+          enabled: true
+          type: nfs
+          path: /mnt/AI_SSD/recover_backup
+          server: "10.0.10.10"
+
+    php-config:
+      PHP_MEMORY_LIMIT: "2048M"
+      PHP_POST_MAX_SIZE: "2048M"
+      PHP_UPLOAD_MAX_FILESIZE: "2048M"
     credentials:
       s3:
         type: s3
@@ -48,6 +52,12 @@ spec:
         secretKey: "${S3_KEY}"
         encrKey: "${S3_KEY}"
     persistence:
+      tmp:
+        mountPath: /tmp
+        enabled: true
+        type: nfs 
+        path: /mnt/AI_SSD/recover_backup
+        server: "10.0.10.10"
       config:
         volsync:
           - name: config

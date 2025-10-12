@@ -2,14 +2,15 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: wordpress-sally
-  namespace: wordpress-guests
+  name: omada-controller
+  namespace: omada-controller
+
 spec:
   interval: 15m
   chart:
     spec:
-      chart: wordpress
-      version: 10.8.2
+      chart: omada-controller
+      version: 17.8.0
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -18,7 +19,7 @@ spec:
   timeout: 20m
   maxHistory: 3
   driftDetection:
-    mode: enabled
+    mode: warn
   install:
     createNamespace: true
     remediation:
@@ -39,9 +40,18 @@ spec:
         secretKey: "${S3_KEY}"
         encrKey: "${S3_KEY}"
     persistence:
-      config:
+      data:
         volsync:
-          - name: config
+          - name: data
+            type: restic
+            credentials: s3
+            dest:
+             enabled: true
+            src:
+              enabled: true
+      work:
+        volsync:
+          - name: work
             type: restic
             credentials: s3
             dest:
@@ -49,17 +59,17 @@ spec:
             src:
               enabled: true
     ingress:
-      wordpress:
+      main:
         enabled: true
         primary: true
         ingressClassName: internal
         hosts:
-          - host: wordpress-sally.cloud.local
+          - host: omada-controller.cloud.local
             paths:
               - path: /
         tls:
           - hosts:
-              - wordpress-sally.cloud.local
+              - omada-controller.cloud.local
         integrations:
           traefik:
             enabled: false

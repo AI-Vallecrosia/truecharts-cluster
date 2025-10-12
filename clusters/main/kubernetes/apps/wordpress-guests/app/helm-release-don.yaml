@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: wordpress
-      version: 9.17.0
+      version: 11.6.3
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -67,3 +67,22 @@ spec:
         integrations:
           traefik:
             enabled: false
+    mariadb: 
+      credentials:
+        s3:
+          type: s3
+          url: "${S3_ENDPOINT}"
+          bucket: "${S3_BUCKET}"
+          accessKey: "${S3_ID}"
+          secretKey: "${S3_KEY}"
+          encrKey: "${S3_KEY}"
+      persistence:
+        data: 
+          volsync:
+            - name: mariadb-data
+              type: restic
+              credentials: s3
+              dest:
+                enabled: true
+              src:
+                enabled: true
