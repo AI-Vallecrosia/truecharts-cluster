@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: nextcloud
-      version: 38.3.1
+      version: 38.3.15
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -151,10 +151,10 @@ spec:
               mountPath: /var/www/html/data
               readOnly: true
     
-    cnpg:
-      main:
-        backups:
-          enabled: true
-          credentials: s3
-        recovery:
-          credentials: s3
+  cnpg:
+     main:
+      backups:
+        enabled: true
+        credentials: s3
+      recovery:
+        credentials: s3
