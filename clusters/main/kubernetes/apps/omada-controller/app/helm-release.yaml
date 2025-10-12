@@ -2,14 +2,15 @@
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
-  name: wordpress-casaebottega
-  namespace: wordpress-guests
+  name: omada-controller
+  namespace: omada-controller
+
 spec:
   interval: 15m
   chart:
     spec:
-      chart: wordpress
-      version: 9.17.0
+      chart: omada-controller
+      version: 17.8.0
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -30,19 +31,6 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    mariadb:
-      persistence:
-        tmp:
-          mountPath: /tmp
-          enabled: true
-          type: nfs
-          path: /mnt/AI_SSD/recover_backup
-          server: "10.0.10.10"
-
-    php-config:
-      PHP_MEMORY_LIMIT: "2048M"
-      PHP_POST_MAX_SIZE: "2048M"
-      PHP_UPLOAD_MAX_FILESIZE: "2048M"
     credentials:
       s3:
         type: s3
@@ -52,15 +40,18 @@ spec:
         secretKey: "${S3_KEY}"
         encrKey: "${S3_KEY}"
     persistence:
-      tmp:
-        mountPath: /tmp
-        enabled: true
-        type: nfs 
-        path: /mnt/AI_SSD/recover_backup
-        server: "10.0.10.10"
-      config:
+      data:
         volsync:
-          - name: config
+          - name: data
+            type: restic
+            credentials: s3
+            dest:
+             enabled: true
+            src:
+              enabled: true
+      work:
+        volsync:
+          - name: work
             type: restic
             credentials: s3
             dest:
@@ -68,21 +59,17 @@ spec:
             src:
               enabled: true
     ingress:
-      wordpress:
+      main:
         enabled: true
         primary: true
-        ingressClassName: external
+        ingressClassName: internal
         hosts:
-          - host: www.ristocasaebottega.it
-            paths: 
-              - path: /
-          - host: wordpress-casaebottega.cloud.local
+          - host: omada-controller.cloud.local
             paths:
               - path: /
         tls:
           - hosts:
-              - www.ristocasaebottega.it
-              - wordpress-casaebottega.cloud.local
+              - omada-controller.cloud.local
         integrations:
           traefik:
             enabled: false
