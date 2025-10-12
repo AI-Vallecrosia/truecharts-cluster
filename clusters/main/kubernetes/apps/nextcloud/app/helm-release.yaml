@@ -31,6 +31,20 @@ spec:
     keepHistory: false
   values:
     cnpg:
+      credentials:
+        s3:
+          type: s3
+          url: "${S3_ENDPOINT}"
+          bucket: "${S3_BUCKET}"
+          accessKey: "${S3_ID}"
+          secretKey: "${S3_KEY}"
+          encrKey: "${S3_KEY}"
+      main:
+        backups:
+          enabled: true
+          credentials: s3
+        recovery:
+          credentials: s3
       persistence:
         main:
           size: 50G
@@ -150,11 +164,3 @@ spec:
             nginx:
               mountPath: /var/www/html/data
               readOnly: true
-    
-  cnpg:
-     main:
-      backups:
-        enabled: true
-        credentials: s3
-      recovery:
-        credentials: s3
