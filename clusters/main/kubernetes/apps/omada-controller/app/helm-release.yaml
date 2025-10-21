@@ -67,8 +67,6 @@ spec:
           - host: omada-controller.cloud.local
             paths:
               - path: /
-                overrideService:
-                  port: 8043
         integrations:
           traefik:
             enabled: false
