@@ -36,9 +36,6 @@ spec:
           credentials: s3
         recovery:
           credentials: s3
-      persistence:
-        main:
-          size: 50G
     nextcloud:
 #      php:
 #        memory_limit: 3G
