@@ -58,12 +58,12 @@ spec:
              enabled: true
             src:
               enabled: true
-#    service:
-#      main:
-#        ports:
-#          main:
-#            targetPort: 8043
-            #port: 443
+    service:
+      main:
+        ports:
+          main:
+            targetPort: 8043
+            port: 443
     ingress:
       main:
         enabled: true
