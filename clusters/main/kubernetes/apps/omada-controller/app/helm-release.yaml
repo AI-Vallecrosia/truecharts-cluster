@@ -61,9 +61,13 @@ spec:
     service:
       main:
         type: "LoadBalancer"
+        loadBalancerIP: "10.0.10.103"
       comm:
         type: "LoadBalancer"
+        loadBalancerIP: "10.0.10.103"
       omada-tcp:
         type: "LoadBalancer"
+        loadBalancerIP: "10.0.10.103"
       omada-udp:
         type: "LoadBalancer"
+        loadBalancerIP: "10.0.10.103"
