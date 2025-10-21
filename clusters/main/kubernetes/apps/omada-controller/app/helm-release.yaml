@@ -63,3 +63,7 @@ spec:
         type: "LoadBalancer"
       comm:
         type: "LoadBalancer"
+      omada-tcp:
+        type: "LoadBalancer"
+      omada-udp:
+        type: "LoadBalancer"
