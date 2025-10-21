@@ -40,15 +40,15 @@ spec:
         secretKey: "${S3_KEY}"
         encrKey: "${S3_KEY}"
     persistence:
-#      data:
-#        volsync:
-#          - name: data
-#            type: restic
-#            credentials: s3
-#            dest:
-#             enabled: true
-#            src:
-#              enabled: true
+      data:
+        volsync:
+          - name: data
+            type: restic
+            credentials: s3
+            dest:
+             enabled: true
+            src:
+              enabled: true
       work:
         volsync:
           - name: work
@@ -58,15 +58,6 @@ spec:
              enabled: true
             src:
               enabled: true
-    ingress:
+    service:
       main:
-        enabled: true
-        primary: true
-        ingressClassName: internal
-        hosts:
-          - host: omada-controller.cloud.local
-            paths:
-              - path: /
-        integrations:
-          traefik:
-            enabled: false
+        loadBalancerIP: 10.0.10.100
