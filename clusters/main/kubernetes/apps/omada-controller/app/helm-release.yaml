@@ -62,7 +62,7 @@ spec:
       main:
         ports:
           main:
-            targetPort: 443
+            port: 443
     ingress:
       main:
         enabled: true
@@ -72,9 +72,6 @@ spec:
           - host: omada-controller.cloud.local
             paths:
               - path: /
-        tls:
-          - hosts:
-              - omada-controller.cloud.local
         integrations:
           traefik:
             enabled: false
