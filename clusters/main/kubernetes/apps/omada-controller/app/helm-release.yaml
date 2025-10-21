@@ -54,8 +54,8 @@ spec:
           - name: work
             type: restic
             credentials: s3
-            dest:
-             enabled: true
+            #dest:
+            # enabled: true
             src:
               enabled: true
     ingress:
