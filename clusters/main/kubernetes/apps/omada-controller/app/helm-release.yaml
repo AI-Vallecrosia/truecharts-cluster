@@ -61,8 +61,7 @@ spec:
     service:
       main:
         type: "LoadBalancer"
-        loadBalancerIP: 10.0.10.100
-        ports:
-          main:
-            protocol: https
-            port: 8043
+        loadBalancerIP: 10.0.10.103
+      comm:
+        type: "LoadBalancer"
+        loadBalancerIP: 10.0.10.103
