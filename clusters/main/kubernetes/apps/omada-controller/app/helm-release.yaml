@@ -40,22 +40,22 @@ spec:
         secretKey: "${S3_KEY}"
         encrKey: "${S3_KEY}"
     persistence:
-      data:
-        volsync:
-          - name: data
-            type: restic
-            credentials: s3
-            dest:
-             enabled: true
-            src:
-              enabled: true
+      #data:
+      #  volsync:
+      #    - name: data
+      #      type: restic
+      #      credentials: s3
+      #      dest:
+      #       enabled: true
+      #      src:
+      #        enabled: true
       work:
         volsync:
           - name: work
             type: restic
             credentials: s3
-            #dest:
-            # enabled: true
+            dest:
+             enabled: true
             src:
               enabled: true
     ingress:
