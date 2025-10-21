@@ -58,12 +58,6 @@ spec:
              enabled: true
             src:
               enabled: true
-    service:
-      main:
-        ports:
-          main:
-            targetPort: 8043
-            port: 443
     ingress:
       main:
         enabled: true
@@ -73,6 +67,8 @@ spec:
           - host: omada-controller.cloud.local
             paths:
               - path: /
+                overrideService:
+                  port: 8043
         integrations:
           traefik:
             enabled: false
