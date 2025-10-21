@@ -30,7 +30,7 @@ spec:
       stopAll: false
     cnpg:
       main:
-        mode: recovery
+        #mode: recovery
         backups:
           enabled: true
           credentials: s3
