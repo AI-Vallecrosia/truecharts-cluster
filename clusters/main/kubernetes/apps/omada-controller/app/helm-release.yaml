@@ -60,7 +60,7 @@ spec:
               enabled: true
     service:
       main:
-        type: "loadBalancer"
+        type: "LoadBalancer"
         loadBalancerIP: 10.0.10.100
         ports:
           main:
