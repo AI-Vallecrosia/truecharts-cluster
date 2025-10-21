@@ -62,12 +62,24 @@ spec:
       main:
         type: "LoadBalancer"
         loadBalancerIP: "10.0.10.103"
+        integrations:
+          metallb:
+            enabled: true
       comm:
         type: "LoadBalancer"
         loadBalancerIP: "10.0.10.103"
+        integrations:
+          metallb:
+            enabled: true
       omada-tcp:
         type: "LoadBalancer"
         loadBalancerIP: "10.0.10.103"
+        integrations:
+          metallb:
+            enabled: true
       omada-udp:
         type: "LoadBalancer"
         loadBalancerIP: "10.0.10.103"
+        integrations:
+          metallb:
+            enabled: true
