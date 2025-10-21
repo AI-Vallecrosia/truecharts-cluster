@@ -63,7 +63,7 @@ spec:
         ports:
           main:
             targetPort: 8043
-            port: 443
+            #port: 443
     ingress:
       main:
         enabled: true
