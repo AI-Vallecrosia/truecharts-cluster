@@ -5,41 +5,32 @@ metadata:
   name: nextcloud
   namespace: nextcloud
 spec:
-  interval: 15m
+  interval: 5m
   chart:
     spec:
       chart: nextcloud
-      version: 38.5.1
+      version: 38.4.0
       sourceRef:
         kind: HelmRepository
         name: truecharts
         namespace: flux-system
-      interval: 15m
-  timeout: 20m
-  maxHistory: 3
-  driftDetection:
-    mode: warn
+      interval: 5m
   install:
     createNamespace: true
+    crds: CreateReplace
     remediation:
       retries: 3
   upgrade:
-    cleanupOnFail: true
+    crds: CreateReplace
     remediation:
       retries: 3
-  uninstall:
-    keepHistory: false
+  timeout: 20m
   values:
+    global:
+      stopAll: false
     cnpg:
-      credentials:
-        s3:
-          type: s3
-          url: "${S3_ENDPOINT}"
-          bucket: "${S3_BUCKET}"
-          accessKey: "${S3_ID}"
-          secretKey: "${S3_KEY}"
-          encrKey: "${S3_KEY}"
       main:
+        mode: recovery
         backups:
           enabled: true
           credentials: s3
@@ -49,13 +40,13 @@ spec:
         main:
           size: 50G
     nextcloud:
-      php:
-        memory_limit: 3G
-        upload_limit: 30G
-        pm_max_children: 540
-        pm_start_servers: 54
-        pm_min_spare_servers: 36
-        pm_max_spare_servers: 90
+#      php:
+#        memory_limit: 3G
+#        upload_limit: 30G
+#        pm_max_children: 540
+#        pm_start_servers: 54
+#        pm_min_spare_servers: 36
+#        pm_max_spare_servers: 90
       credentials:
         initialAdminUser: admin
         initialAdminPassword: adminpass
@@ -114,9 +105,6 @@ spec:
           - hosts:
             #  - "nextcloud.${DOMAIN_0}"
               - nextcloud.cloud.local
-        integrations:
-          traefik:
-            enabled: false
     credentials:
       s3:
         type: s3
