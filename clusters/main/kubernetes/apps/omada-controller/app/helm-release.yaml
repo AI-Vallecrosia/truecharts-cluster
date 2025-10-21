@@ -60,8 +60,8 @@ spec:
               enabled: true
     service:
       main:
-        type: "LoadBalancer"
-        loadBalancerIP: 10.0.10.103
+        type: "ExternalIP"
+        externalIP: 10.0.10.103
       comm:
-        type: "LoadBalancer"
-        loadBalancerIP: 10.0.10.103
+        type: "ExternalIP"
+        externalIP: 10.0.10.104
