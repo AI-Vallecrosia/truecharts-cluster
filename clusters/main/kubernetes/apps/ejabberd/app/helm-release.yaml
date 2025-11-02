@@ -29,10 +29,10 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-  values:
-    configmap:
-      configuration:
-        enabled: true
-        data:
-          hosts:
-          - "localhost"
+  # values:
+  #   configmap:
+  #     configuration:
+  #       enabled: true
+  #       data:
+  #         hosts:
+  #         - "localhost"
