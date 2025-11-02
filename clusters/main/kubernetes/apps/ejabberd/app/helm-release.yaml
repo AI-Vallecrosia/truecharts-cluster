@@ -45,6 +45,7 @@ spec:
         enabled: true
     configmap:
       configuration:
+        namespace: ejabberd
         enabled: true
         data:
           hosts:
