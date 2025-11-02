@@ -9,9 +9,8 @@ resources:
   - home-ops-mirror.yaml
   - jetstack.yaml
   - kustomization.yaml
+  - metallb.yaml
   - prometheus-community.yaml
   - spegel.yaml
   - truecharts.yaml
 # more goes here!
-  - twuni.yaml
-  - actions-runner-controller.yaml

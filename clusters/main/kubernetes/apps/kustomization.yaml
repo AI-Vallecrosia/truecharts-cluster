@@ -2,18 +2,9 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - kubernetes-dashboard/ks.yaml
-  - calibre-web/ks.yaml
-  - fireflyiii/ks.yaml
   - frigate/ks.yaml
-  - genea/ks.yaml
-  - home-assistant/ks.yaml
-  - homepage/ks.yaml
-  - jellyfin/ks.yaml
-  - navidrome/ks.yaml
   - nextcloud/ks.yaml
   - wordpress/ks.yaml
-  - matomo/ks.yaml
-  - odoo/ks.yaml
   - wordpress-guests/ks.yaml
   - renovate/ks.yaml
   - omada-controller/ks.yaml
