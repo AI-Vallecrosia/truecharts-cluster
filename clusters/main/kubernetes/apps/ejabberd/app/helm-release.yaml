@@ -37,6 +37,9 @@ spec:
   #         hosts:
   #         - "localhost"
   values:
+    ports:
+      main:
+        enabled: true
     persistence:
       configuration:
         mountPath: /opt/ejabberd/conf/ejabberd.yml
