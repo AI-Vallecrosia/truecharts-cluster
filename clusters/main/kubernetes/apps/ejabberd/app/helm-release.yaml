@@ -11,7 +11,7 @@ spec:
       chart: ejabberd
       version: 21.11.3
       sourceRef:
-        kind: HelmRepository
+        kind: GitRepository
         name: oreste
         namespace: flux-system
       interval: 15m
