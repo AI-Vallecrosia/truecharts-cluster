@@ -17,3 +17,4 @@ resources:
   - wordpress-guests/ks.yaml
   - renovate/ks.yaml
   - omada-controller/ks.yaml
+  - ejabberd/ks.yaml
