@@ -37,19 +37,20 @@ spec:
   #         hosts:
   #         - "localhost"
   values:
-    ports:
-      main:
-        enabled: true
     persistence:
-      configuration:
-        mountPath: /opt/ejabberd/conf/ejabberd.yml
-        objectName: configuration
+      conf:
+        mountPath: /opt/ejabberd/conf/
+        objectName: config
         type: configmap
         enabled: true
+        items:
+        - key: ejabberd.yml
+          path: ejabberd.yml
+        
     configmap:
-      configuration:
-        namespace: ejabberd
+      config:
         enabled: true
         data:
-          hosts:
-            - localhost
+          ejabberd.yml: >-
+            hosts:
+              - localhost
