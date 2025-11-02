@@ -35,4 +35,4 @@ spec:
         enabled: true
         data:
           hosts:
-            - localhost
+          - "localhost"
