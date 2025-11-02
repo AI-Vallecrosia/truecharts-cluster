@@ -8,7 +8,7 @@ spec:
   interval: 15m
   chart:
     spec:
-      chart: ejabberd
+      chart: ./charts/incubator/ejabberd
       version: 0.0.1
       sourceRef:
         kind: GitRepository
