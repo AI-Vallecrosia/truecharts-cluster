@@ -54,3 +54,6 @@ spec:
           ejabberd.yml: >-
             hosts:
               - localhost
+              - 127.0.0.1
+              - {{.Values.name}}
+            
