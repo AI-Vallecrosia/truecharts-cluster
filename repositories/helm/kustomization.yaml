@@ -13,3 +13,5 @@ resources:
   - spegel.yaml
   - truecharts.yaml
 # more goes here!
+  - twuni.yaml
+  - actions-runner-controller.yaml
