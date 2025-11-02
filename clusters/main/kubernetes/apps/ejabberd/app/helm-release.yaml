@@ -36,13 +36,14 @@ spec:
   #       data:
   #         hosts:
   #         - "localhost"
-  persistence:
-    configuration:
-      mountPath: /opt/ejabberd/conf/ejabberd.yml
-      type: configmap
-      enabled: true
-  configmaps:
-      enabled: true
-      data:
-        hosts:
-          - localhost
+  values:
+    persistence:
+      configuration:
+        mountPath: /opt/ejabberd/conf/ejabberd.yml
+        type: configmap
+        enabled: true
+    configmaps:
+        enabled: true
+        data:
+          hosts:
+            - localhost
