@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: ejabberd
-      version: 21.11.3
+      version: 0.0.1
       sourceRef:
         kind: GitRepository
         name: oreste
@@ -29,47 +29,3 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-  values:
-    credentials:
-      s3:
-        type: s3
-        url: "${S3_ENDPOINT}"
-        bucket: "${S3_BUCKET}"
-        accessKey: "${S3_ID}"
-        secretKey: "${S3_KEY}"
-        encrKey: "${S3_KEY}"
-    persistence:
-      data:
-        mountPath: /books
-        enabled: true
-        type: nfs 
-        path: /mnt/AI_Storage/Calibre_library
-        server: "10.0.10.10"
-      config:
-        volsync:
-          - name: config
-            type: restic
-            credentials: s3
-            dest:
-             enabled: true
-            src:
-              enabled: true
-    ingress:
-      main:
-        ingressClassName: external
-        enabled: true
-        hosts:
-          - host: "calibre.${DOMAIN_0}"
-            paths:
-              - path: /
-          - host: ejabberd.cloud.local
-            paths:
-              - path: /
-        tls:
-          - hosts:
-              - ejabberd.cloud.local
-              - "calibre.${DOMAIN_0}"
-        integrations:
-          traefik:
-            enabled: false
-   
