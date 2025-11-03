@@ -34,7 +34,7 @@ spec:
       config:
         enabled: true
         data:
-          ejabberd.yml: >-
+          ejabberd.yml:
             loglevel: debug
             hosts:
               - localhost
