@@ -30,13 +30,8 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    services:
-     main:
-        ports:
-          web-admin:
-            enabled: true
     ingress:
-      main:
+      web-admin:
         ingressClassName: internal
         enabled: true
         hosts:
@@ -56,6 +51,7 @@ spec:
               - localhost
               - 127.0.0.1
               - ejabberd.ejabberd.svc.cluster.local
+              - ejabberd.cloud.local
             listen:
               -
                 ip: "0.0.0.0"
@@ -64,7 +60,5 @@ spec:
                 tls: false
                 request_handlers:
                   /admin: ejabberd_web_admin
-              # - 
-              #   ip: "0.0.0.0"
-              #   port: 5222
+
             
