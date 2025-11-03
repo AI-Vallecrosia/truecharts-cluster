@@ -94,3 +94,47 @@ spec:
                 module: ejabberd_http
                 request_handlers:
                   /api: mod_http_api
+            shaper:
+              fast: 100000
+              normal:
+                burst_size: 20000
+                rate: 3000
+            shaper_rules:
+              c2s_shaper:
+                none: admin
+                normal: all
+              max_user_offline_messages:
+                "100": all
+                "5000": admin
+              max_user_sessions: 10
+              s2s_shaper: fast
+            api_permissions:
+              admin access:
+                what:
+                - "*"
+                - "!stop"
+                - "!start"
+                who:
+                  access:
+                    allow:
+                    - acl: loopback
+                    - acl: admin
+                  oauth:
+                    access:
+                      allow:
+                      - acl: loopback
+                      - acl: admin
+                    scope: ejabberd:admin
+              console commands:
+                from:
+                - ejabberd_ctl
+                - mod_http_api
+                what: "*"
+                who: all
+              public commands:
+                what:
+                - status
+                - connected_users_number
+                who:
+                  ip: "127.0.0.1/8"
+
