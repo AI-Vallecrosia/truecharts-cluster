@@ -29,7 +29,18 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-  values:  
+  values:
+    ingress:
+      main:
+        ingressClassName: internal
+        enabled: true
+        hosts:
+          - host: "ejabberd.cloud.local"
+            paths:
+              - path: /
+        tls:
+          - hosts:
+              - ejabberd.cloud.local
     configmap:
       config:
         enabled: true
@@ -48,4 +59,7 @@ spec:
                 tls: false
                 request_handlers:
                   /admin: ejabberd_web_admin
+              # - 
+              #   ip: "0.0.0.0"
+              #   port: 5222
             
