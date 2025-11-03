@@ -41,24 +41,6 @@ spec:
         tls:
           - hosts:
               - ejabberd.cloud.local
-    configmap:
-      config:
-        enabled: true
-        data:
-          ejabberd.yml: |
-            loglevel: debug
-            hosts:
-              - localhost
-              - 127.0.0.1
-              - ejabberd.ejabberd.svc.cluster.local
-              - ejabberd.cloud.local
-            listen:
-              -
-                ip: "0.0.0.0"
-                port: 5280
-                module: ejabberd_http
-                tls: false
-                request_handlers:
-                  /admin: ejabberd_web_admin
+
 
             
