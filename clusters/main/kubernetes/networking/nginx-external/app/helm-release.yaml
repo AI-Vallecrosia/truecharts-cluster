@@ -47,7 +47,7 @@ spec:
       config:
         allow-snippet-annotations: true
         annotations-risk-level: Critical
-        client_max_body_size: 0
+        client_max_body_size: 100G
         client-body-buffer-size: 100M
         client-body-timeout: 120
         client-header-timeout: 120
