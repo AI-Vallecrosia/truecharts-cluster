@@ -31,8 +31,7 @@ spec:
     keepHistory: false
   values:
     ingress:
-      web-admin:
-        primary: true
+      main:
         ingressClassName: internal
         enabled: true
         hosts:
