@@ -32,6 +32,7 @@ spec:
   values:
     ingress:
       web-admin:
+        primary: true
         ingressClassName: internal
         enabled: true
         hosts:
