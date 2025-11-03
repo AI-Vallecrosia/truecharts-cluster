@@ -102,6 +102,11 @@ spec:
                 module: ejabberd_http
                 request_handlers:
                   /api: mod_http_api
+              - 
+                ip: "0.0.0.0"
+                port: 5222
+                transport: "tcp"
+                module: ejabberd_c2s
             shaper:
               fast: 100000
               normal:
