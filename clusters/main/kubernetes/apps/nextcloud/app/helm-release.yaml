@@ -29,8 +29,8 @@ spec:
     global:
       stopAll: false
     cnpg:
-      enabled: true
       cluster:
+        enabled: true
         AWS_REQUEST_CHECKSUM_CALCULATION: when_required
         AWS_RESPONSE_CHECKSUM_VALIDATION: when_required
       main:
