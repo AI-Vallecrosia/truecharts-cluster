@@ -30,6 +30,11 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    services:
+     main:
+        ports:
+          web-admin:
+            enabled: true
     ingress:
       main:
         ingressClassName: internal
