@@ -31,3 +31,12 @@ spec:
     #   podMonitorEnabled: false
     #   grafanaDashboard:
     #     create: true
+    workload:
+      main:
+        podSpec:
+          containers:
+            main:
+              env:
+                AWS_REQUEST_CHECKSUM_CALCULATION: when_required
+                AWS_RESPONSE_CHECKSUM_VALIDATION: when_required
+
