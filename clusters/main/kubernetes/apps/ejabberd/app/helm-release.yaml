@@ -29,16 +29,14 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-  values: {}
-        
-    # configmap:
-    #   config:
-    #     enabled: true
-    #     data:
-    #       ejabberd.yml: >-
-    #         {{- tpl (.Files.Get "ejabberd.yaml") . | nindent 4 }}
-    #         hosts:
-    #           - localhost
-    #           - 127.0.0.1
-    #           - '{{.Values.name}}'
+  values:  
+    configmap:
+      config:
+        enabled: true
+        data:
+          ejabberd.yml: >-
+            hosts:
+              - localhost
+              - 127.0.0.1
+              - ejabberd.ejabberd.svc.cluster.local
             
