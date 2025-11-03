@@ -29,31 +29,16 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-  # values:
-  #   configmap:
-  #     configuration:
-  #       enabled: true
-  #       data:
-  #         hosts:
-  #         - "localhost"
-  values:
-    persistence:
-      conf:
-        mountPath: /opt/ejabberd/conf/
-        objectName: config
-        type: configmap
-        enabled: true
-        items:
-        - key: ejabberd.yml
-          path: ejabberd.yml
+  values: {}
         
-    configmap:
-      config:
-        enabled: true
-        data:
-          ejabberd.yml: >-
-            hosts:
-              - localhost
-              - 127.0.0.1
-              - '{{.Values.name}}'
+    # configmap:
+    #   config:
+    #     enabled: true
+    #     data:
+    #       ejabberd.yml: >-
+    #         {{- tpl (.Files.Get "ejabberd.yaml") . | nindent 4 }}
+    #         hosts:
+    #           - localhost
+    #           - 127.0.0.1
+    #           - '{{.Values.name}}'
             
