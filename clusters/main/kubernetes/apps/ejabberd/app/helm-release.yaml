@@ -53,6 +53,8 @@ spec:
               - "ejabberd.ejabberd.svc.cluster.local"
               - "ejabberd.cloud.local"
             acl:
+              admin:
+                user: admin@ejabberd.cloud.local
               local:
                 user_regexp: ""
               loopback:
