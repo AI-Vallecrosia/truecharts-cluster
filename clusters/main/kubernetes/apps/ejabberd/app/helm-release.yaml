@@ -75,3 +75,20 @@ spec:
                 allow: local
               trusted_network:
                 allow: loopback
+            acme:
+              auto: false
+            listen:
+              -
+                ip: "0.0.0.0"
+                port: 5280
+                module: ejabberd_http
+                tls: false
+                request_handlers:
+                  /admin: ejabberd_web_admin
+              -
+                ip: "127.0.0.1"
+                port: 5281
+                transport: "tcp"
+                module: ejabberd_http
+                request_handlers:
+                  /api: mod_http_api
