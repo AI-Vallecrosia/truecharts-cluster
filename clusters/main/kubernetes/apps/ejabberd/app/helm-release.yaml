@@ -30,6 +30,13 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    services:
+      xmpp:
+        type: "LoadBalancer"
+        loadBalancerIP: "10.0.10.108"
+        integrations:
+          metallb:
+            enabled: true
     ingress:
       main:
         ingressClassName: internal
@@ -40,7 +47,7 @@ spec:
               - path: /
         tls:
           - hosts:
-              - ejabberd.cloud.local         
+              - ejabberd.cloud.local     
     configmap:
       config:
         enabled: true
@@ -50,6 +57,7 @@ spec:
             hosts:
               - "localhost"
               - "127.0.0.1"
+              - "10.0.10.108"
               - "ejabberd.ejabberd.svc.cluster.local"
               - "ejabberd.cloud.local"
             acl:
