@@ -35,6 +35,7 @@ spec:
         enabled: true
         data:
           ejabberd.yml: >-
+            loglevel: debug
             hosts:
               - localhost
               - 127.0.0.1
