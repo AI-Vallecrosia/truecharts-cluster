@@ -41,37 +41,37 @@ spec:
         tls:
           - hosts:
               - ejabberd.cloud.local         
-  configmap:
-    config:
-      enabled: true
-      data:
-        ejabberd.yml: |
-          loglevel: debug
-          hosts:
-            - "localhost"
-            - "127.0.0.1"
-            - "ejabberd.ejabberd.svc.cluster.local"
-            - "ejabberd.cloud.local"
-          acl:
-            local:
-              user_regexp: ""
-            loopback:
-              ip:
-              - "127.0.0.0/8"
-              - "::1/128"
-          access_rules:
-            announce:
-              allow: admin
-            c2s:
-              allow: all
-              deny: blocked
-            configure:
-              allow: admin
-            local:
-              allow: local
-            muc_create:
-              allow: local
-            pubsub_createnode:
-              allow: local
-            trusted_network:
-              allow: loopback
+    configmap:
+      config:
+        enabled: true
+        data:
+          ejabberd.yml: |
+            loglevel: debug
+            hosts:
+              - "localhost"
+              - "127.0.0.1"
+              - "ejabberd.ejabberd.svc.cluster.local"
+              - "ejabberd.cloud.local"
+            acl:
+              local:
+                user_regexp: ""
+              loopback:
+                ip:
+                - "127.0.0.0/8"
+                - "::1/128"
+            access_rules:
+              announce:
+                allow: admin
+              c2s:
+                allow: all
+                deny: blocked
+              configure:
+                allow: admin
+              local:
+                allow: local
+              muc_create:
+                allow: local
+              pubsub_createnode:
+                allow: local
+              trusted_network:
+                allow: loopback
