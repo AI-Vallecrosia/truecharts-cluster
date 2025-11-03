@@ -29,7 +29,25 @@ spec:
       retries: 3
   uninstall:
     keepHistory: false
-  values:  
+  values:
+    services:
+      xmpp:
+        type: "LoadBalancer"
+        loadBalancerIP: "10.0.10.108"
+        integrations:
+          metallb:
+            enabled: true
+    ingress:
+      main:
+        ingressClassName: internal
+        enabled: true
+        hosts:
+          - host: "ejabberd.cloud.local"
+            paths:
+              - path: /
+        tls:
+          - hosts:
+              - ejabberd.cloud.local     
     configmap:
       config:
         enabled: true
@@ -37,9 +55,38 @@ spec:
           ejabberd.yml: |
             loglevel: debug
             hosts:
-              - localhost
-              - 127.0.0.1
-              - ejabberd.ejabberd.svc.cluster.local
+              - "localhost"
+              - "127.0.0.1"
+              - "10.0.10.108"
+              - "ejabberd.ejabberd.svc.cluster.local"
+              - "ejabberd.cloud.local"
+            acl:
+              admin:
+                user: admin@ejabberd.cloud.local
+              local:
+                user_regexp: ""
+              loopback:
+                ip:
+                - "127.0.0.0/8"
+                - "::1/128"
+            access_rules:
+              announce:
+                allow: admin
+              c2s:
+                allow: all
+                deny: blocked
+              configure:
+                allow: admin
+              local:
+                allow: local
+              muc_create:
+                allow: local
+              pubsub_createnode:
+                allow: local
+              trusted_network:
+                allow: loopback
+            acme:
+              auto: false
             listen:
               -
                 ip: "0.0.0.0"
@@ -48,4 +95,59 @@ spec:
                 tls: false
                 request_handlers:
                   /admin: ejabberd_web_admin
-            
+              -
+                ip: "127.0.0.1"
+                port: 5281
+                transport: "tcp"
+                module: ejabberd_http
+                request_handlers:
+                  /api: mod_http_api
+              - 
+                ip: "0.0.0.0"
+                port: 5222
+                transport: "tcp"
+                module: ejabberd_c2s
+            shaper:
+              fast: 100000
+              normal:
+                burst_size: 20000
+                rate: 3000
+            shaper_rules:
+              c2s_shaper:
+                none: admin
+                normal: all
+              max_user_offline_messages:
+                "100": all
+                "5000": admin
+              max_user_sessions: 10
+              s2s_shaper: fast
+            api_permissions:
+              admin access:
+                what:
+                - "*"
+                - "!stop"
+                - "!start"
+                who:
+                  access:
+                    allow:
+                    - acl: loopback
+                    - acl: admin
+                  oauth:
+                    access:
+                      allow:
+                      - acl: loopback
+                      - acl: admin
+                    scope: ejabberd:admin
+              console commands:
+                from:
+                - ejabberd_ctl
+                - mod_http_api
+                what: "*"
+                who: all
+              public commands:
+                what:
+                - status
+                - connected_users_number
+                who:
+                  ip: "127.0.0.1/8"
+
