@@ -7,11 +7,11 @@ metadata:
   namespace: flux-system
 spec:
   interval: 30m
-  url: https://github.com/GVoreste/truecharts/
+  url: https://github.com/GVoreste/truecharts-charts/
   ref:
     branch: master
   secretRef:
-    name: deploy-key
+    name: deploy-key-oreste-charts
   ignore: |
     # exclude all
     /*
