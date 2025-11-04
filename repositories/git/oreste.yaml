@@ -7,7 +7,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 30m
-  url: https://github.com/GVoreste/truecharts-charts/
+  url: git@github.com:GVoreste/truecharts-charts.git
   ref:
     branch: master
   secretRef:
