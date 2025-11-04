@@ -48,6 +48,8 @@ spec:
         pm_start_servers: 54
         pm_min_spare_servers: 36
         pm_max_spare_servers: 90
+        upload_max_filesize : 200G
+        post_max_size: 200G
       credentials:
         initialAdminUser: admin
         initialAdminPassword: adminpass
