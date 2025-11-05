@@ -42,14 +42,12 @@ spec:
           credentials: s3
     nextcloud:
       php:
-        memory_limit: 30G
-        upload_limit: 30G
-        pm_max_children: 540
-        pm_start_servers: 54
-        pm_min_spare_servers: 36
-        pm_max_spare_servers: 90
-        upload_max_filesize : 200G
-        post_max_size: 200G
+        memory_limit: 10G
+        upload_limit: 100G
+        pm_max_children: 180
+        pm_start_servers: 18
+        pm_min_spare_servers: 12
+        pm_max_spare_servers: 30
       credentials:
         initialAdminUser: admin
         initialAdminPassword: adminpass
@@ -96,7 +94,7 @@ spec:
     ingress:
       main:
         enabled: true
-        ingressClassName: internal
+        ingressClassName: external
         hosts:
           - host: "nextcloud.${DOMAIN_0}"
             paths:
