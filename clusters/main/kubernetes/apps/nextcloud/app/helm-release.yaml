@@ -42,7 +42,7 @@ spec:
           credentials: s3
     nextcloud:
       php:
-        memory_limit: 3G
+        memory_limit: 30G
         upload_limit: 30G
         pm_max_children: 540
         pm_start_servers: 54
