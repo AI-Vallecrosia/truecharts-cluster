@@ -47,14 +47,9 @@ spec:
       config:
         allow-snippet-annotations: true
         annotations-risk-level: Critical
-        client-max-body-size: 512G
         client-body-buffer-size: 100M
         client-body-timeout: 120
         client-header-timeout: 120
-        client-body-buffer-size: 200M
-        proxy-read-timeout: 14400
-        proxy-connect-timeout: 14400
-        proxy-busy-buffers-size: 1024K
         enable-brotli: "true"
         enable-ocsp: "true"
         enable-real-ip: "true"
@@ -64,7 +59,8 @@ spec:
         keep-alive-requests: 10000
         keep-alive: 120
         proxy-body-size: 0
-        proxy-buffer-size: 512k
+        proxy-buffer-size: 16k
+        proxy-busy-buffers-size: 32k
         ssl-protocols: TLSv1.3 TLSv1.2
         use-forwarded-headers: "true"
       metrics:
