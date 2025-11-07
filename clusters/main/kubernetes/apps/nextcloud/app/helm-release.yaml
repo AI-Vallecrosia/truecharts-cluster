@@ -32,7 +32,7 @@ spec:
       main:
         podSpec:
           containers:
-            main:
+            nextcloud:
               probes: 
                 startup:
                   enabled: false
