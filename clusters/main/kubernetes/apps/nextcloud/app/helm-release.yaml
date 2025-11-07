@@ -32,8 +32,8 @@ spec:
       main:
         podSpec:
           containers:
-            nextcloud:
-              probes: 
+            main:
+              probes:
                 startup:
                   enabled: false
                 readiness:
