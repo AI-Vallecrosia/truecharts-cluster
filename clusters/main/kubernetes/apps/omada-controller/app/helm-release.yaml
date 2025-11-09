@@ -85,6 +85,7 @@ spec:
             enabled: true
     workload:
       main:
+        replicas: 0
         podSpec:
           containers:
             main:
