@@ -83,16 +83,3 @@ spec:
         integrations:
           metallb:
             enabled: true
-    workload:
-      main:
-        replicas: 0
-        podSpec:
-          containers:
-            main:
-              probes: 
-                liveness:
-                  enabled: false
-                readiness:
-                  enabled: false
-                startup:
-                  enabled: false
