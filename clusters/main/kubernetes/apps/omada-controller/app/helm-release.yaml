@@ -84,9 +84,9 @@ spec:
           metallb:
             enabled: true
     workload:
-      targetSelector:
-        main:
-          podSelector:
+      main:
+        podSpec:
+          containers:
             main:
               probes: 
                 liveness:
