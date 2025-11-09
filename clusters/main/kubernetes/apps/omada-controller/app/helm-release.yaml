@@ -83,3 +83,15 @@ spec:
         integrations:
           metallb:
             enabled: true
+    workload:
+      targetSelector:
+        main:
+          podSelector:
+            main:
+              probes: 
+                liveness:
+                  enabled: false
+                readiness:
+                  enabled: false
+                startup:
+                  enabled: false
