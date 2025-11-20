@@ -53,8 +53,8 @@ spec:
         initialAdminPassword: adminpass
       general:
         default_phone_region: IT
-        #accessIP: ${NGINX_EXTERNAL_IP}
-        accessIP: ${NGINX_INTERNAL_IP}
+        accessIP: ${NGINX_EXTERNAL_IP}
+        #accessIP: ${NGINX_INTERNAL_IP}
     
       clamav:
         enabled: true
