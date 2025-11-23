@@ -33,7 +33,7 @@ spec:
             main:
               resources:
                 limits:
-                  memory: 8000Mi
+                  memory: 11000Mi
                 requests:
                   memory: 1000Mi
     global:
