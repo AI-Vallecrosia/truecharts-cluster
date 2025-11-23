@@ -26,6 +26,16 @@ spec:
       retries: 3
   timeout: 20m
   values:
+    workload:
+      main:
+        podSpec:
+          containers:
+            main:
+              resources:
+                limits:
+                  memory: 8000Mi
+                requests:
+                  memory: 1000Mi
     global:
       stopAll: false
     cnpg:
@@ -41,16 +51,6 @@ spec:
         recovery:
           credentials: s3
     nextcloud:
-      workload:
-        main:
-          podSpec:
-            containers:
-              main:
-                resources:
-                  limits:
-                    memory: 8000Mi
-                  requests:
-                    memory: 1000Mi
       php:
         memory_limit: 10G
         upload_limit: 100G
