@@ -48,9 +48,9 @@ spec:
               main:
                 resources:
                   limits:
-                    memory: 8G
+                    memory: 8000Mi
                   requests:
-                    memory: 1G
+                    memory: 1000Mi
       php:
         memory_limit: 10G
         upload_limit: 100G
