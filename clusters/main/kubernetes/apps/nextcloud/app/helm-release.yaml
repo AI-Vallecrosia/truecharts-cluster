@@ -41,13 +41,23 @@ spec:
         recovery:
           credentials: s3
     nextcloud:
+      workload:
+        main:
+          podSpec:
+            containers:
+              main:
+                resources:
+                  limits:
+                    memory: 8G
+                  requests:
+                    memory: 1G
       php:
         memory_limit: 10G
         upload_limit: 100G
-        pm_max_children: 180
-        pm_start_servers: 18
-        pm_min_spare_servers: 12
-        pm_max_spare_servers: 30
+        pm_max_children: 14
+        pm_start_servers: 3
+        pm_min_spare_servers: 3
+        pm_max_spare_servers: 10
       credentials:
         initialAdminUser: admin
         initialAdminPassword: adminpass
