@@ -31,20 +31,20 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    ingress:
+    service:
       main:
         type: "LoadBalancer"
         loadBalancerIP: "10.0.10.108"
         integrations:
           metallb:
             enabled: true
-      guestportal:
-        enabled: true
-        ingressClassName: internal
-        hosts:
-          - host: "unifi.cloud.local"
-            paths:
-              - path: /
-        tls:
-          - hosts:
-              - unifi.cloud.local
+#      guestportal:
+#        enabled: true
+#        ingressClassName: internal
+#        hosts:
+#          - host: "unifi.cloud.local"
+#            paths:
+#              - path: /
+#        tls:
+#          - hosts:
+#              - unifi.cloud.local
