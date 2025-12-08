@@ -9,3 +9,4 @@ resources:
   - renovate/ks.yaml
   - omada-controller/ks.yaml
   - ejabberd/ks.yaml
+  - unifi/ks.yaml
