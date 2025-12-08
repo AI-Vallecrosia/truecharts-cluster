@@ -34,7 +34,7 @@ spec:
     service:
       main:
         type: "LoadBalancer"
-        loadBalancerIP: "10.0.10.108"
+        loadBalancerIP: "10.0.10.107"
         integrations:
           metallb:
             enabled: true
