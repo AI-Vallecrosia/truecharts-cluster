@@ -39,3 +39,6 @@ spec:
           - host: "unifi.cloud.local"
             paths:
               - path: /
+        tls:
+          - hosts:
+              - unifi.cloud.local
