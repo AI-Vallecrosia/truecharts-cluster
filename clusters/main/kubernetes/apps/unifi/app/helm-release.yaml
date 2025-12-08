@@ -32,7 +32,7 @@ spec:
     keepHistory: false
   values:
     ingress:
-       main:
+       guestportal:
         enabled: true
         ingressClassName: internal
         hosts:
