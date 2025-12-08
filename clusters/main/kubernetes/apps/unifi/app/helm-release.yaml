@@ -32,7 +32,13 @@ spec:
     keepHistory: false
   values:
     ingress:
-       guestportal:
+      main:
+        type: "LoadBalancer"
+        loadBalancerIP: "10.0.10.108"
+        integrations:
+          metallb:
+            enabled: true
+      guestportal:
         enabled: true
         ingressClassName: internal
         hosts:
