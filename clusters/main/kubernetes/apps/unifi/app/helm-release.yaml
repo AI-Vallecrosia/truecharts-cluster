@@ -38,6 +38,30 @@ spec:
         integrations:
           metallb:
             enabled: true
+      comm:
+        type: "LoadBalancer"
+        loadBalancerIP: "10.0.10.107"
+        integrations:
+          metallb:
+            enabled: true
+      guestportal:
+        type: "LoadBalancer"
+        loadBalancerIP: "10.0.10.107"
+        integrations:
+          metallb:
+            enabled: true
+      speedtest:
+        type: "LoadBalancer"
+        loadBalancerIP: "10.0.10.107"
+        integrations:
+          metallb:
+            enabled: true
+      stun:
+        type: "LoadBalancer"
+        loadBalancerIP: "10.0.10.107"
+        integrations:
+          metallb:
+            enabled: true
 #      guestportal:
 #        enabled: true
 #        ingressClassName: internal
