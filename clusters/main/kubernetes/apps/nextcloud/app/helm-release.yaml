@@ -41,12 +41,13 @@ spec:
     cnpg:
       main:
         cluster:
+          instances: 3
           env:
             AWS_REQUEST_CHECKSUM_CALCULATION: when_required
             AWS_RESPONSE_CHECKSUM_VALIDATION: when_required
           walStorage:
             size: "100Gi"
-        
+        #mode: recovery
         backups:
           revision: "1"
           enabled: true
