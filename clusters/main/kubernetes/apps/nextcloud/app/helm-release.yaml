@@ -46,8 +46,8 @@ spec:
             AWS_REQUEST_CHECKSUM_CALCULATION: when_required
             AWS_RESPONSE_CHECKSUM_VALIDATION: when_required
           walStorage:
-            size: "150Gi"
-        #mode: recovery
+            size: "100Gi"
+        mode: recovery
         backups:
           enabled: true
           credentials: s3
