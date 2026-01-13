@@ -41,7 +41,7 @@ spec:
     cnpg:
       main:
         cluster:
-          instances: 1
+          instances: 3
           env:
             AWS_REQUEST_CHECKSUM_CALCULATION: when_required
             AWS_RESPONSE_CHECKSUM_VALIDATION: when_required
