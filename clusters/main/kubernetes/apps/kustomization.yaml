@@ -3,7 +3,7 @@ kind: Kustomization
 resources:
   - kubernetes-dashboard/ks.yaml
   - frigate/ks.yaml
-  #- nextcloud/ks.yaml
+  - nextcloud/ks.yaml
   - wordpress/ks.yaml
   - wordpress-guests/ks.yaml
   - renovate/ks.yaml
