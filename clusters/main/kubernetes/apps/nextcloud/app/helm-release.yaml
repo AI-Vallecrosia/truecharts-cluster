@@ -53,6 +53,7 @@ spec:
           enabled: true
           credentials: s3
         recovery:
+          revision: "1"
           credentials: s3
     nextcloud:
       php:
