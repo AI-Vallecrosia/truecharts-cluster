@@ -47,7 +47,7 @@ spec:
             AWS_RESPONSE_CHECKSUM_VALIDATION: when_required
           walStorage:
             size: "100Gi"
-        mode: recovery
+        #mode: recovery
         backups:
           revision: "3"
           enabled: true
