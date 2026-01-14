@@ -47,13 +47,13 @@ spec:
             AWS_RESPONSE_CHECKSUM_VALIDATION: when_required
           walStorage:
             size: "100Gi"
-        #mode: recovery
+        mode: recovery
         backups:
-          revision: "1"
+          revision: "3"
           enabled: true
           credentials: s3
         recovery:
-          revision: "1"
+          revision: "3"
           credentials: s3
     nextcloud:
       php:
@@ -149,8 +149,8 @@ spec:
             src:
               enabled: true
       data:
-        type: nfs 
-        path: /mnt/AI_Storage/Nextcloud-data
+        type: nfs
+        path: /mnt/AI_Storage/Nextcloud-users-data
         server: "10.0.10.10"
         targetSelector:
           main:
