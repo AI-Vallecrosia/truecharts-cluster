@@ -57,17 +57,20 @@ spec:
           - host: www.spicyjewellery.it 
             paths: 
               - path: /
-          - host: wordpress-don.cloud.local
-            paths:
+          - host: spicyjewellery.it 
+            paths: 
               - path: /
+          #- host: wordpress-don.cloud.local
+          #  paths:
+          #    - path: /
         tls:
           - hosts:
               - www.spicyjewellery.it
-              - wordpress-don.cloud.local
+              - spicyjewellery.it
+              # - wordpress-don.cloud.local
         integrations:
           traefik:
             enabled: false
-    mariadb: 
       credentials:
         s3:
           type: s3
