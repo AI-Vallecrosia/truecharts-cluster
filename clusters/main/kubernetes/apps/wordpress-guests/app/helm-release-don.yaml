@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: wordpress
-      version: 11.18.32
+      version: 11.18.33
       sourceRef:
         kind: HelmRepository
         name: truecharts
