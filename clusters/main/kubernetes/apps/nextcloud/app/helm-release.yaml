@@ -41,6 +41,9 @@ spec:
     cnpg:
       main:
         cluster:
+          postgresql:
+              max_slot_wal_keep_size: 5GB
+              wal_compression: lz4
           instances: 3
           env:
             AWS_REQUEST_CHECKSUM_CALCULATION: when_required
