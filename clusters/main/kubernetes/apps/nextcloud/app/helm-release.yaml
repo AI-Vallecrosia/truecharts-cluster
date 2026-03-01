@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: nextcloud
-      version: 40.13.0
+      version: 40.8.9
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -50,9 +50,9 @@ spec:
             AWS_RESPONSE_CHECKSUM_VALIDATION: when_required
           walStorage:
             size: "100Gi"
-        #mode: recovery
+        mode: recovery
         backups:
-          #revision: "3"
+          revision: "1"
           enabled: true
           credentials: s3
         recovery:
