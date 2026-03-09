@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: nextcloud-chart
-  namespace: nextcloud
+  namespace: nextcloud-chart
 spec:
   interval: 5m
   chart:
