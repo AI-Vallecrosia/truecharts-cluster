@@ -59,7 +59,7 @@ spec:
           #revision: "3"
           credentials: s3
           pitrTarget:
-            time: "2026-02-17T17:00:00Z"
+            time: "2026-02-13T00:00:01Z"
     nextcloud:
       php:
         memory_limit: 10G
