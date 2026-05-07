@@ -28,7 +28,7 @@ spec:
       system-upgrade-controller:
         strategy: RollingUpdate
         serviceAccount:
-          name: system-upgrade
+          identifier: system-upgrade
         containers:
           app:
             image:
