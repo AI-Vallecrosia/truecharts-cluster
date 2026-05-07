@@ -83,7 +83,7 @@ spec:
     serviceAccount:
       system-upgrade:
         staticToken: true
-        forceRename: system-upgrade
+        forceRename: system-upgrade-controller
         enabled: true
     persistence:
       tmp:
