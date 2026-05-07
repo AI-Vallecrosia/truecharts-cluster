@@ -82,7 +82,6 @@ spec:
           effect: NoSchedule
     serviceAccount:
       system-upgrade:
-        staticToken: true
         forceRename: system-upgrade
         enabled: true
     persistence:
