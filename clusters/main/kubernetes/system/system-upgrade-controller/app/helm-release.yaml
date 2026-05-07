@@ -28,7 +28,7 @@ spec:
       system-upgrade-controller:
         strategy: RollingUpdate
         serviceAccount:
-          identifier: system-upgrade
+          name: system-upgrade
         containers:
           app:
             image:
@@ -80,6 +80,7 @@ spec:
           effect: NoSchedule
     serviceAccount:
       system-upgrade:
+        forceRename: system-upgrade
         enabled: true
     persistence:
       tmp:
