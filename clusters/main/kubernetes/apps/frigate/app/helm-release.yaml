@@ -116,9 +116,8 @@ spec:
             password: "${CAMERA_MAGAZZINO_INT_PSWD_ONVIF}"
       record:
         enabled: true
-        retain:
+        motion:
           days: 7
-          mode: motion
       birdseye:
         enabled: True
         mode: continuous
