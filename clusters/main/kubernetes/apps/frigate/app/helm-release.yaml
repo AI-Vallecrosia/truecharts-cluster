@@ -36,7 +36,12 @@ spec:
         limits:
           cpu: 2000m
           memory: 3000Mi
-        requests:
+          nvidia.com/gpu: 1
+      workload:
+         main:
+           podSpec:
+             runtimeClassName: "nvidia"
+      requests:
           cpu: 200m
           memory: 500Mi
     frigateConfig:

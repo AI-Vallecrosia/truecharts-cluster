@@ -26,11 +26,15 @@ spec:
       retries: 3
   timeout: 20m
   values:
+    resources:
+      limits:
+        nvidia.com/gpu: 1
     workload:
       main:
         podSpec:
           containers:
             main:
+              runtimeClasses: "nvidia"
               resources:
                 limits:
                   memory: 11000Mi
