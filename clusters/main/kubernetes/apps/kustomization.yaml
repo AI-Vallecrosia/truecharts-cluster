@@ -10,3 +10,4 @@ resources:
   - omada-controller/ks.yaml
   - ejabberd/ks.yaml
   - unifi/ks.yaml
+  - nvidia-device-plugin/ks.yaml
