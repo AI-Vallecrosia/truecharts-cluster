@@ -39,10 +39,20 @@ nodes:
               gateway: ${GATEWAY}
           vip:
             ip: ${VIP}
+      schematic:
+        customization:
+          extraKernelArgs:
+            - net.ifnames=0
+            - sysctl.kernel.kexec_load_disabled=1
+          systemExtensions:
+            officialExtensions:
+              - siderolabs/nonfree-kmod-nvidia-lts
+              - siderolabs/nvidia-container-toolkit-lts 
+      patches:
+         - "@./patches/nvidia.yaml"
 controlPlane:
     patches:
         - '@./patches/controlplane.yaml'
-        - "@./patches/nvidia.yaml"
     kernelModules:
      - name: nvme_tcp
      - name: vfio_pci
@@ -55,9 +65,7 @@ controlPlane:
                 officialExtensions:
                     - siderolabs/util-linux-tools
                     - siderolabs/iscsi-tools
-                    - siderolabs/qemu-guest-agent
-                    - siderolabs/nonfree-kmod-nvidia-lts
-                    - siderolabs/nvidia-container-toolkit-lts 
+                    - siderolabs/qemu-guest-agent 
     machineFiles:
     - content: |
         [plugins."io.containerd.grpc.v1.cri"]
