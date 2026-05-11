@@ -31,19 +31,15 @@ spec:
     keepHistory: false
 
   values:
-    frigate:
-      resources:
-        limits:
-          cpu: 2000m
-          memory: 3000Mi
-          nvidia.com/gpu: 1
-      workload:
-         main:
-           podSpec:
-             runtimeClassName: "nvidia"
-      requests:
-          cpu: 200m
-          memory: 500Mi
+    workload:
+      main:
+        podSpec:
+          runtimeClassName: "nvidia"
+          containers:
+            main:
+              resources:
+                limits:
+                  nvidia.com/gpu: 1
     frigateConfig:
       ffmpeg:
         hwaccel_args: preset-nvidia
