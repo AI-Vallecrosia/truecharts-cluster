@@ -32,7 +32,7 @@ spec:
     workload:
       main:
         podSpec:
-          runtimeClasses: "nvidia"
+          runtimeClassName: "nvidia"
           containers:
             main:
               resources:
