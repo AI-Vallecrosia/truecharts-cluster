@@ -63,6 +63,10 @@ spec:
           #revision: "3"
           credentials: s3
     nextcloud:
+      workload:
+        main:
+          podSpec:
+            runtimeClassName: "nvidia"
       php:
         memory_limit: 10G
         upload_limit: 100G
