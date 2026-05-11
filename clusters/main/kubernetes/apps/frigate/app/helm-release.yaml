@@ -47,7 +47,7 @@ spec:
         enabled: False
       cameras:
         magazzino_ext:
-          enabled: True
+          enabled: False
           ffmpeg:
             inputs:
               - path: "rtsp://${CAMERA_MAGAZZINO_EXT_USR}:${CAMERA_MAGAZZINO_EXT_PSWD}@${CAMERA_MAGAZZINO_EXT_IP}/streaming/channels/101"
