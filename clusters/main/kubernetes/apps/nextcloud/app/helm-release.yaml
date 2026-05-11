@@ -26,7 +26,8 @@ spec:
       retries: 3
   timeout: 20m
   values:
-
+    podOptions:
+      runtimeClassName: "nvidia"
     resources:
       limits:
         nvidia.com/gpu: 1
