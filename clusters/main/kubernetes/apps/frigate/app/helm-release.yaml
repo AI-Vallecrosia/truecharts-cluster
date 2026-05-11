@@ -45,6 +45,8 @@ spec:
           cpu: 200m
           memory: 500Mi
     frigateConfig:
+      ffmpeg:
+        hwaccel_args: preset-nvidia
       mqtt:
         enabled: False
       cameras:
