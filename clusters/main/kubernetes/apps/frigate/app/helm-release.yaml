@@ -86,6 +86,10 @@ spec:
             port: 8000
             user: "${CAMERA_UFFICIO_USR_ONVIF}"
             password: "${CAMERA_UFFICIO_PSWD_ONVIF}"
+          motion:
+            mask:
+              - "0.718,0,0.682,0.468,0.43,0.37,0.426,0"
+              - "0.025,0.056,0.311,0.057,0.313,0.091,0.023,0.093"
         citofono:
           enabled: True
           ffmpeg:
@@ -97,6 +101,11 @@ spec:
                 roles:
                   - detect
           webui_url: "http://${CAMERA_CITOFONO_USR}/doc/index.html"
+          motion:
+            mask:
+              - "0.09,0.054,0.21,0.036,0.25,0.218,0.334,0.284,0.366,0.405,0.315,0.473,0.22,0.396,0.071,0.491,0,0.374,0.02,0.144"
+              - "0.366,0.264,0.423,0.164,0.569,0.188,0.604,0.332,0.532,0.5,0.417,0.507"
+              - "0.884,0.521,0.872,0.441,0.903,0.405,0.854,0.269,0.907,0.157,0.977,0.169,1,0.346,0.999,0.513"
         magazzino_int:
           enabled: true
           ffmpeg:
@@ -118,6 +127,9 @@ spec:
             port: 8000
             user: "${CAMERA_MAGAZZINO_INT_USR_ONVIF}"
             password: "${CAMERA_MAGAZZINO_INT_PSWD_ONVIF}"
+          motion:
+            mask:
+              - "0.35,0.028,0.64,0.028,0.641,0.063,0.348,0.063"
       record:
         enabled: true
         continuous:
