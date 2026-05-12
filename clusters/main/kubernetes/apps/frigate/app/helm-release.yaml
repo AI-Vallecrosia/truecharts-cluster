@@ -128,7 +128,7 @@ spec:
           retain:
             days: 200
             mode: all
-        detection:
+        detections:
           retain:
             days: 50
             mode: all
@@ -137,7 +137,7 @@ spec:
         timestamp: True
         retain:
           default: 10
-          object:
+          objects:
             person: 30
       birdseye:
         enabled: True
