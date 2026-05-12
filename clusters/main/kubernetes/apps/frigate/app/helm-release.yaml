@@ -45,9 +45,9 @@ spec:
         hwaccel_args: preset-nvidia
       mqtt:
         enabled: False
-      detectors:
-        onnx:
-          type: onnx
+      #detectors:
+      #  onnx:
+      #    type: onnx
       cameras:
         magazzino_ext:
           enabled: False
