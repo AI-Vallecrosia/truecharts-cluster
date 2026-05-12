@@ -77,7 +77,7 @@ spec:
               - path: "rtsp://${CAMERA_UFFICIO_USR}:${CAMERA_UFFICIO_PSWD}@${CAMERA_UFFICIO_IP}/streaming/channels/102"
                 roles:
                   - detect
-          webui_uri: "https://${CAMERA_UFFICIO_USR}/doc/index.html"
+          webui_url: "https://${CAMERA_UFFICIO_USR}/doc/index.html"
           detect:
             width: 640
             height: 360
@@ -96,7 +96,7 @@ spec:
               - path: "rtsp://${CAMERA_CITOFONO_USR}:${CAMERA_CITOFONO_PSWD}@${CAMERA_CITOFONO_IP}/streaming/channels/102"
                 roles:
                   - detect
-          webui_uri: "http://${CAMERA_CITOFONO_USR}/doc/index.html"
+          webui_url: "http://${CAMERA_CITOFONO_USR}/doc/index.html"
         magazzino_int:
           enabled: true
           ffmpeg:
@@ -109,7 +109,7 @@ spec:
                 input_args: preset-rtsp-generic
                 roles:
                   - detect
-          webui_uri: "https://${CAMERA_MAGAZZINO_INT_USR}/index.html"
+          webui_url: "https://${CAMERA_MAGAZZINO_INT_USR}/index.html"
           detect:
             width: 640
             height: 360
@@ -137,8 +137,8 @@ spec:
         timestamp: True
         retain:
           default: 10
-        object:
-          person: 30
+          object:
+            person: 30
       birdseye:
         enabled: True
         mode: continuous
