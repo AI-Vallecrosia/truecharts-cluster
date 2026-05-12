@@ -45,9 +45,6 @@ spec:
         hwaccel_args: preset-nvidia
       mqtt:
         enabled: False
-      detectors:
-        onnx:
-          type: onnx
       cameras:
         magazzino_ext:
           enabled: False
@@ -77,7 +74,6 @@ spec:
               - path: "rtsp://${CAMERA_UFFICIO_USR}:${CAMERA_UFFICIO_PSWD}@${CAMERA_UFFICIO_IP}/streaming/channels/102"
                 roles:
                   - detect
-          webui_uri: "https://${CAMERA_UFFICIO_USR}/doc/index.html"
           detect:
             width: 640
             height: 360
@@ -96,7 +92,6 @@ spec:
               - path: "rtsp://${CAMERA_CITOFONO_USR}:${CAMERA_CITOFONO_PSWD}@${CAMERA_CITOFONO_IP}/streaming/channels/102"
                 roles:
                   - detect
-          webui_uri: "http://${CAMERA_CITOFONO_USR}/doc/index.html"
         magazzino_int:
           enabled: true
           ffmpeg:
@@ -109,7 +104,6 @@ spec:
                 input_args: preset-rtsp-generic
                 roles:
                   - detect
-          webui_uri: "https://${CAMERA_MAGAZZINO_INT_USR}/index.html"
           detect:
             width: 640
             height: 360
@@ -120,33 +114,16 @@ spec:
             password: "${CAMERA_MAGAZZINO_INT_PSWD_ONVIF}"
       record:
         enabled: true
-        continuous:
-          days: 2
         motion:
           days: 7
-        alerts:
-          retain:
-            days: 200
-            mode: all
-        detection:
-          retain:
-            days: 50
-            mode: all
-      snapshots:
-        enabled: True
-        timestamp: True
-        retain:
-          default: 10
-        object:
-          person: 30
       birdseye:
         enabled: True
         mode: continuous
       camera_groups:
         AI_Vallecrosia:
           order: 1
-          icon: LuAperture
-          cameras: [ufficio,citofono]
+          icon: LuApple
+          cameras: ufficio
 
     credentials:
       s3:
