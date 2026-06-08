@@ -48,15 +48,6 @@ spec:
              enabled: true
             src:
               enabled: true
-      data: 
-        volsync:
-          - name: mariadb-data
-            type: restic
-            credentials: s3
-            dest:
-              enabled: true
-            src:
-              enabled: true
     ingress:
       wordpress:
         enabled: true
