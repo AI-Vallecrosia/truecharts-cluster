@@ -1,0 +1,2 @@
+export SOPS_AGE_KEY_FILE="/home/oreste/Public/truecharts-cluster/age.agekey"
+export SOPS_CONFIG="/home/oreste/Public/truecharts-cluster/.sops.yaml"
