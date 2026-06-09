@@ -213,8 +213,44 @@
         "systemExtensions": {
           "$ref": "#/$defs/SystemExtensions"
         },
+        "bootloader": {
+          "type": "integer"
+        },
         "secureboot": {
           "$ref": "#/$defs/SecureBootCustomization"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "CustomizationWrapper": {
+      "properties": {
+        "extraKernelArgs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "description": "Extra kernel arguments to be passed to the kernel"
+        },
+        "meta": {
+          "$ref": "#/$defs/MetaValue"
+        },
+        "systemExtensions": {
+          "$ref": "#/$defs/SystemExtensions",
+          "description": "Talos system extensions to be installed"
+        },
+        "bootloader": {
+          "type": "string",
+          "enum": [
+            "sd-boot",
+            "grub",
+            "dual-boot"
+          ],
+          "description": "The bootloader to be used in the image"
+        },
+        "secureboot": {
+          "$ref": "#/$defs/SecureBootCustomization",
+          "description": "The secure boot options for the image"
         }
       },
       "additionalProperties": false,
@@ -426,8 +462,23 @@
     },
     "EncryptionKeyTPM": {
       "properties": {
+        "options": {
+          "$ref": "#/$defs/EncryptionKeyTPMOptions"
+        },
         "checkSecurebootStatusOnEnroll": {
           "type": "boolean"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "EncryptionKeyTPMOptions": {
+      "properties": {
+        "pcrs": {
+          "items": {
+            "type": "integer"
+          },
+          "type": "array"
         }
       },
       "additionalProperties": false,
@@ -506,6 +557,9 @@
             "type": "string"
           },
           "type": "array"
+        },
+        "kubeNetworkPoliciesEnabled": {
+          "type": "boolean"
         }
       },
       "additionalProperties": false,
@@ -880,7 +934,7 @@
             "type": "string"
           },
           "type": "array",
-          "description": "List of manifest files to be added to the node"
+          "description": "DEPRECATED: Use \"patches\" instead"
         },
         "certSANs": {
           "items": {
@@ -908,7 +962,7 @@
           "description": "Whether to skip schematic validation"
         },
         "schematic": {
-          "$ref": "#/$defs/Schematic",
+          "$ref": "#/$defs/SchematicWrapper",
           "description": "Talos image customization to be used in the installer image"
         },
         "imageSchematic": {
@@ -1021,7 +1075,7 @@
             "type": "string"
           },
           "type": "array",
-          "description": "List of manifest files to be added to the node"
+          "description": "DEPRECATED: Use \"patches\" instead"
         },
         "certSANs": {
           "items": {
@@ -1049,7 +1103,7 @@
           "description": "Whether to skip schematic validation"
         },
         "schematic": {
-          "$ref": "#/$defs/Schematic",
+          "$ref": "#/$defs/SchematicWrapper",
           "description": "Talos image customization to be used in the installer image"
         },
         "imageSchematic": {
@@ -1184,11 +1238,28 @@
     },
     "Schematic": {
       "properties": {
+        "owner": {
+          "type": "string"
+        },
         "overlay": {
           "$ref": "#/$defs/Overlay"
         },
         "customization": {
           "$ref": "#/$defs/Customization"
+        }
+      },
+      "additionalProperties": false,
+      "type": "object"
+    },
+    "SchematicWrapper": {
+      "properties": {
+        "overlay": {
+          "$ref": "#/$defs/Overlay",
+          "description": "The overlay options for image generation"
+        },
+        "customization": {
+          "$ref": "#/$defs/CustomizationWrapper",
+          "description": "Talos image customization"
         }
       },
       "additionalProperties": false,
@@ -1332,6 +1403,10 @@
         "name": {
           "type": "string",
           "description": "Name of user volume config"
+        },
+        "volumeType": {
+          "type": "integer",
+          "description": "Volume type of user volume config"
         },
         "provisioning": {
           "$ref": "#/$defs/ProvisioningSpecWrapper",

@@ -9,5 +9,3 @@ sopssecret.yaml
 sopssecret*
 *sopssecret*
 mounts/
-forgetool
-.env
