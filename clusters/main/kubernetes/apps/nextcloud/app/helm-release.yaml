@@ -31,17 +31,17 @@ spec:
 #    resources:
 #      limits:
 #        nvidia.com/gpu: 1
-    workload:
-      main:
-        podSpec:
-          runtimeClassName: "nvidia"
-          containers:
-            main:
-              resources:
-                limits:
-                  memory: 11000Mi
-                requests:
-                  memory: 1000Mi
+    # workload:
+    #   main:
+    #     podSpec:
+    #       runtimeClassName: "nvidia"
+    #       containers:
+    #         main:
+    #           resources:
+    #             limits:
+    #               memory: 11000Mi
+    #             requests:
+    #               memory: 1000Mi
     global:
       stopAll: false
     cnpg:
