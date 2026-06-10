@@ -42,16 +42,16 @@ spec:
         accessKey: "${S3_ID}"
         secretKey: "${S3_KEY}"
         encrKey: "${S3_KEY}"
-    persistence:
-      config:
-        volsync:
-          - name: config
-            type: restic
-            credentials: s3
-            dest:
-             enabled: true
-            src:
-              enabled: true
+    # persistence:
+    #   config:
+    #     volsync:
+    #       - name: config
+    #         type: restic
+    #         credentials: s3
+    #         dest:
+    #          enabled: true
+    #         src:
+    #           enabled: true
     ingress:
       wordpress:
         enabled: true
