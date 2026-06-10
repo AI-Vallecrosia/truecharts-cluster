@@ -26,11 +26,11 @@ spec:
       retries: 3
   timeout: 20m
   values:
-    podOptions:
-      runtimeClassName: "nvidia"
-    resources:
-      limits:
-        nvidia.com/gpu: 1
+#    podOptions:
+#      runtimeClassName: "nvidia"
+#    resources:
+#      limits:
+#        nvidia.com/gpu: 1
     workload:
       main:
         podSpec:
@@ -65,10 +65,10 @@ spec:
           #revision: "3"
           credentials: s3
     nextcloud:
-      workload:
-        nextcloud:
-          podSpec:
-            runtimeClassName: "nvidia"
+#      workload:
+#        nextcloud:
+#          podSpec:
+#            runtimeClassName: "nvidia"
       php:
         memory_limit: 10G
         upload_limit: 100G

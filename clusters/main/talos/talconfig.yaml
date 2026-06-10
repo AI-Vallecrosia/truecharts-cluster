@@ -1,6 +1,6 @@
 clusterName: ${CLUSTERNAME}
 # renovate: datasource=docker depName=ghcr.io/siderolabs/installer
-talosVersion: v1.13.3
+talosVersion: v1.13.4
 # renovate: datasource=docker depName=ghcr.io/siderolabs/kubelet
 kubernetesVersion: v1.36.1
 endpoint: https://${VIP}:6443
@@ -31,7 +31,7 @@ nodes:
       size: <= 1600GB
     networkInterfaces:
       # suffix is the adapter mac adres.
-      - interface: eth0
+      - interface: ens3
         addresses:
           - ${MASTER1IP_CIDR}
         routes:
@@ -39,16 +39,50 @@ nodes:
             gateway: ${GATEWAY}
         vip:
           ip: ${VIP}
-    schematic:
-      customization:
-        systemExtensions:
-          officialExtensions:
-            - siderolabs/nonfree-kmod-nvidia-lts
-            - siderolabs/nvidia-container-toolkit-lts
-            - siderolabs/util-linux-tools
+  - hostname: k8s-control-2
+    ipAddress: ${MASTER2IP_IP}
+    controlPlane: true
+    nameservers:
+      - ${GATEWAY}
+    installDiskSelector:
+      size: <= 1600GB
+    networkInterfaces:
+      # suffix is the adapter mac adres.
+      - interface: ens3
+        addresses:
+          - ${MASTER2IP_CIDR}
+        routes:
+          - network: 0.0.0.0/0
+            gateway: ${GATEWAY}
+        vip:
+          ip: ${VIP}
+  - hostname: k8s-control-3
+    ipAddress: ${MASTER3IP_IP}
+    controlPlane: true
+    nameservers:
+      - ${GATEWAY}
+    installDiskSelector:
+      size: <= 1600GB
+    networkInterfaces:
+      # suffix is the adapter mac adres.
+      - interface: ens3
+        addresses:
+          - ${MASTER3IP_CIDR}
+        routes:
+          - network: 0.0.0.0/0
+            gateway: ${GATEWAY}
+        vip:
+          ip: ${VIP}
+#    schematic:
+#      customization:
+#        systemExtensions:
+#          officialExtensions:
+#            - siderolabs/nonfree-kmod-nvidia-lts
+#            - siderolabs/nvidia-container-toolkit-lts
+#            - siderolabs/util-linux-tools
     patches:
       - '@./patches/garbagecollection.yaml'
-      - "@./patches/nvidia.yaml"
+#      - "@./patches/nvidia.yaml"
 controlPlane:
   patches:
     - '@./patches/controlplane.yaml'
