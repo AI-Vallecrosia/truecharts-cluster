@@ -8,4 +8,5 @@ resources:
   - ./clustersettings.secret.yaml
   - ./flux.yaml
   - ./namespace.yaml
+  - ./upgradesettings.ymal
   # - sopssecret.secret.yaml
