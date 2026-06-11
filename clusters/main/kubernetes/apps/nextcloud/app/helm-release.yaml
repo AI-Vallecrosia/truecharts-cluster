@@ -58,10 +58,11 @@ spec:
             size: "100Gi"
         #mode: recovery
         backups:
-          #revision: "1"
+          revision: "1"
           enabled: true
           credentials: s3
         recovery:
+          enabled: true
           #revision: "3"
           credentials: s3
     nextcloud:
