@@ -31,17 +31,17 @@ spec:
 #    resources:
 #      limits:
 #        nvidia.com/gpu: 1
-    workload:
-      main:
-        podSpec:
-          runtimeClassName: "nvidia"
-          containers:
-            main:
-              resources:
-                limits:
-                  memory: 11000Mi
-                requests:
-                  memory: 1000Mi
+    # workload:
+    #   main:
+    #     podSpec:
+    #       runtimeClassName: "nvidia"
+    #       containers:
+    #         main:
+    #           resources:
+    #             limits:
+    #               memory: 11000Mi
+    #             requests:
+    #               memory: 1000Mi
     global:
       stopAll: false
     cnpg:
@@ -58,10 +58,11 @@ spec:
             size: "100Gi"
         mode: recovery
         backups:
-          #revision: "1"
+          revision: "1"
           enabled: true
           credentials: s3
         recovery:
+          enabled: true
           #revision: "3"
           credentials: s3
     nextcloud:

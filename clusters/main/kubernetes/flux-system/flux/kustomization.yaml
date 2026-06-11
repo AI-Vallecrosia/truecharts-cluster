@@ -7,6 +7,6 @@ resources:
   - ./deploykey-oreste-charts.secret.yaml
   - ./clustersettings.secret.yaml
   - ./flux.yaml
-  - ./upgradesettings.yaml
   - ./namespace.yaml
+  - ./upgradesettings.yaml
   # - sopssecret.secret.yaml
