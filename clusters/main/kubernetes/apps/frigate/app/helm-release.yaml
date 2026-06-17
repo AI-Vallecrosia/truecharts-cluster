@@ -41,8 +41,8 @@ spec:
 #                limits:
 #                  nvidia.com/gpu: 1
     frigateConfig:
-      ffmpeg:
-        hwaccel_args: preset-nvidia
+      #ffmpeg:
+      #  hwaccel_args: preset-nvidia
       mqtt:
         enabled: False
       #detectors:
@@ -130,6 +130,30 @@ spec:
           motion:
             mask:
               - "0.35,0.028,0.64,0.028,0.641,0.063,0.348,0.063"
+        parcheggio:
+          enabled: true
+          ffmpeg:
+            inputs:
+              - path: "rtsp://${CAMERA_PARCHEGGIO_USR}:${CAMERA_PARCHEGGIO_PSWD}@${CAMERA_PARCHEGGIO_IP}:554/h265Preview_01_main"
+                input_args: preset-rtsp-generic
+                roles:
+                  - record
+              - path: "rtsp://${CAMERA_PARCHEGGIO_USR}:${CAMERA_PARCHEGGIO_PSWD}@${CAMERA_PARCHEGGIO_IP}:554/h265Preview_01_sub"
+                input_args: preset-rtsp-generic
+                roles:
+                  - detect
+          webui_url: "https://${CAMERA_PARCHEGGIO_USR}/index.html"
+          detect:
+            width: 640
+            height: 360
+          onvif:
+            host: "${CAMERA_PARCHEGGIO_IP}"
+            port: 8000
+            user: "${CAMERA_PARCHEGGIO_USR_ONVIF}"
+            password: "${CAMERA_PARCHEGGIO_PSWD_ONVIF}"
+          #motion:
+          #  mask:
+          #    - "0.35,0.028,0.64,0.028,0.641,0.063,0.348,0.063"
       record:
         enabled: true
         continuous:
