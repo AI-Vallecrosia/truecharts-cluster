@@ -60,6 +60,10 @@ spec:
     #          enabled: true
     #         src:
     #           enabled: true
+    mariadb:
+      workload:
+        main:
+          replicas: 2
     ingress:
       wordpress:
         enabled: true
