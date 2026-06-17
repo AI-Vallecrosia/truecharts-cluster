@@ -73,6 +73,9 @@ spec:
           #revision: "3"
           credentials: s3
     nextcloud:
+      resources:
+        requests:
+          cpu: 75m
 #      workload:
 #        nextcloud:
 #          podSpec:
