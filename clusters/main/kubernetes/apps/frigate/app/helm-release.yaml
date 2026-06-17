@@ -41,8 +41,8 @@ spec:
 #                limits:
 #                  nvidia.com/gpu: 1
     frigateConfig:
-      ffmpeg:
-        hwaccel_args: preset-nvidia
+      #ffmpeg:
+      #  hwaccel_args: preset-nvidia
       mqtt:
         enabled: False
       #detectors:
