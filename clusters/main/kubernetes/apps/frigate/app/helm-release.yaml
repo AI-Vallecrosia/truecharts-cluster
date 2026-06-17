@@ -31,11 +31,6 @@ spec:
     keepHistory: false
 
   values:
-    resources:
-      limits:
-        cpu: 500m
-      requests:
-        cpu: 120m
     workload:
       main:
         podSpec:

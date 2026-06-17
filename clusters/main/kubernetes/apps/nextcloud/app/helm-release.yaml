@@ -156,18 +156,40 @@ spec:
           - name: html
             type: restic
             credentials: s3
+            cleanupTempPvc: true
+            cleanupCachePvc: true
             dest:
              enabled: true
             src:
+              pruneIntervalDays: 7
+              trigger:
+                schedule: "42 19 * * *"
+              retain:
+                hourly: 5
+                daily: 5
+                weekly: 1
+                monthly: 1
+                yearly: 1
               enabled: true
       config:
         volsync:
           - name: config
             type: restic
             credentials: s3
+            cleanupTempPvc: true
+            cleanupCachePvc: true
             dest:
-             enabled: true
+             enabled: false
             src:
+              pruneIntervalDays: 7
+              trigger:
+                schedule: "03 15 * * *"
+              retain:
+                hourly: 5
+                daily: 5
+                weekly: 1
+                monthly: 1
+                yearly: 1
               enabled: true
       data:
         type: nfs

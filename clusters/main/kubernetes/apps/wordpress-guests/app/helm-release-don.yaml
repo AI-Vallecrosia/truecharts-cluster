@@ -47,9 +47,20 @@ spec:
           - name: config
             type: restic
             credentials: s3
+            cleanupTempPvc: true
+            cleanupCachePvc: true
             dest:
-             enabled: true
+             enabled: false
             src:
+              pruneIntervalDays: 7
+              trigger:
+                schedule: "02 17 * * *"
+              retain:
+                hourly: 5
+                daily: 5
+                weekly: 1
+                monthly: 1
+                yearly: 1
               enabled: true
     mariadb:
       workload:
@@ -62,21 +73,11 @@ spec:
         ingressClassName: external
         hosts:
           - host: www.spicyjewellery.it 
-            paths: 
-              - path: /
           - host: spicyjewellery.it 
-            paths: 
-              - path: /
-          #- host: wordpress-don.cloud.local
-          #  paths:
-          #    - path: /
         tls:
           - hosts:
               - www.spicyjewellery.it
               - spicyjewellery.it
-              # - wordpress-don.cloud.local
-        integrations:
-          traefik:
-            enabled: false
+
 
       
