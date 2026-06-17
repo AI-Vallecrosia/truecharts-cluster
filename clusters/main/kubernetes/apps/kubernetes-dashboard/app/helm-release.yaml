@@ -30,6 +30,12 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    resources:
+      limits:
+        cpu: 10m
+    workload:
+      main:
+        replicas: 2
     service:
       main:
         type: LoadBalancer

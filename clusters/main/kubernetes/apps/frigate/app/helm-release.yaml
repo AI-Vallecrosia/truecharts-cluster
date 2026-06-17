@@ -40,6 +40,7 @@ spec:
               resources:
                 limits:
                   nvidia.com/gpu: 1
+                  cpu: 10m
     frigateConfig:
       ffmpeg:
         hwaccel_args: preset-nvidia
