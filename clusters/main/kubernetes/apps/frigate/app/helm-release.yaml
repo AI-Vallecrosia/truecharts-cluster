@@ -35,7 +35,7 @@ spec:
       limits:
         cpu: 200m
       requests:
-        cpu: 50m
+        cpu: 75m
     workload:
       main:
         podSpec:
