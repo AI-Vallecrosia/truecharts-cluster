@@ -32,7 +32,7 @@ spec:
   values:
     workload:
       main:
-        replicas: 2
+        replicas: 1
     credentials:
       s3:
         type: s3
@@ -65,7 +65,7 @@ spec:
     mariadb:
       workload:
         main:
-          replicas: 2
+          replicas: 1
     ingress:
       wordpress:
         enabled: true
