@@ -33,7 +33,7 @@ spec:
   values:
     resources:
       limits:
-        cpu: 10m
+        cpu: 50m
       requests:
         cpu: 10m
     workload:
