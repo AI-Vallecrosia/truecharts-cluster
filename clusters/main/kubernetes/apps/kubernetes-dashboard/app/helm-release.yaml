@@ -32,9 +32,9 @@ spec:
   values:
     resources:
       limits:
-        cpu: 10m
+        cpu: 20m
       requests:
-        cpu: 10m
+        cpu: 20m
     workload:
       main:
         replicas: 2
