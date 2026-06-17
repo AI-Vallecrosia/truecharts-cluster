@@ -46,7 +46,7 @@ cluster:
                 defaultConstraints:
                   - maxSkew: 1
                     topologyKey: kubernetes.io/hostname
-                    whenUnsatisfiable: ScheduleAnyway
+                    whenUnsatisfiable: DoNotSchedule
                 defaultingType: List
               name: PodTopologySpread
           plugins:
