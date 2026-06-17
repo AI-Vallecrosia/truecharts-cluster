@@ -102,6 +102,9 @@ spec:
         enabled: true
       # Collabora (document editor for Nextcloud. A Collabora container will be deployed automatically.
       collabora:
+        resources:
+          requests:
+            cpu: 75m
         enabled: true
         # default|compact|tabbed
         interface_mode: default
