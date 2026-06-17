@@ -30,11 +30,6 @@ spec:
   uninstall:
     keepHistory: false
   values:
-    resources:
-      limits:
-        cpu: 50m
-      requests:
-        cpu: 50m
     workload:
       main:
         replicas: 2
