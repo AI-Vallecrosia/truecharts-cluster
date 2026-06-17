@@ -20,6 +20,7 @@ cniConfig:
   name: none
 patches:
   - '@./patches/all.yaml'
+  - '@./patches/garbagecollection.yaml'
 nodes:
   # We would adivce to always stick to a "k8s-something-1" style naming scheme
   - hostname: k8s-control-1
@@ -31,7 +32,8 @@ nodes:
       size: <= 1600GB
     networkInterfaces:
       # suffix is the adapter mac adres.
-      - interface: ens3
+      - deviceSelector:
+          hardwareAddr: "${MASTER1IP_MAC}"
         addresses:
           - ${MASTER1IP_CIDR}
         routes:
@@ -39,6 +41,14 @@ nodes:
             gateway: ${GATEWAY}
         vip:
           ip: ${VIP}
+    schematic:
+      customization:
+        systemExtensions:
+          officialExtensions:
+            - siderolabs/nonfree-kmod-nvidia-lts
+            - siderolabs/nvidia-container-toolkit-lts
+    patches:
+      - "@./patches/nvidia.yaml"
   - hostname: k8s-control-2
     ipAddress: ${MASTER2IP_IP}
     controlPlane: true
@@ -48,7 +58,8 @@ nodes:
       size: <= 1600GB
     networkInterfaces:
       # suffix is the adapter mac adres.
-      - interface: ens3
+      - deviceSelector:
+          hardwareAddr: "${MASTER2IP_MAC}"
         addresses:
           - ${MASTER2IP_CIDR}
         routes:
@@ -65,7 +76,8 @@ nodes:
       size: <= 1600GB
     networkInterfaces:
       # suffix is the adapter mac adres.
-      - interface: ens3
+      - deviceSelector:
+          hardwareAddr: "${MASTER3IP_MAC}"
         addresses:
           - ${MASTER3IP_CIDR}
         routes:
@@ -73,16 +85,7 @@ nodes:
             gateway: ${GATEWAY}
         vip:
           ip: ${VIP}
-#    schematic:
-#      customization:
-#        systemExtensions:
-#          officialExtensions:
-#            - siderolabs/nonfree-kmod-nvidia-lts
-#            - siderolabs/nvidia-container-toolkit-lts
-#            - siderolabs/util-linux-tools
-    patches:
-      - '@./patches/garbagecollection.yaml'
-#      - "@./patches/nvidia.yaml"
+
 controlPlane:
   patches:
     - '@./patches/controlplane.yaml'
@@ -92,8 +95,6 @@ controlPlane:
     - name: uio_pci_generic
   schematic:
     customization:
-      extraKernelArgs:
-        - net.ifnames=0
       systemExtensions:
         officialExtensions:
           - siderolabs/util-linux-tools
@@ -115,7 +116,6 @@ controlPlane:
     permissions: 420
     path: /etc/nfsmount.conf
     op: overwrite
-
 worker:
   patches:
     - '@./patches/worker.yaml'
