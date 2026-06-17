@@ -31,8 +31,11 @@ spec:
     keepHistory: false
 
   values:
-    limits:
-      cpu: 10m
+    resources:
+      limits:
+        cpu: 10m
+      requests:
+        cpu: 10m
     workload:
       main:
         podSpec:
@@ -42,7 +45,6 @@ spec:
               resources:
                 limits:
                   nvidia.com/gpu: 1
-                  cpu: 10m
     frigateConfig:
       ffmpeg:
         hwaccel_args: preset-nvidia
