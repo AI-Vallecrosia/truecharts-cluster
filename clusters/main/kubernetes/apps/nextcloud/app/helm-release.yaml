@@ -29,6 +29,8 @@ spec:
     workload:
       main:
         replicas: 2
+      nginx:
+        replicas: 2
 #    podOptions:
 #      runtimeClassName: "nvidia"
 #    resources:
