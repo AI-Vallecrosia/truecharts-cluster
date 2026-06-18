@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  path: clusters/main/kubernetes/apps/renovate/app
+  path: clusters/main/kubernetes/apps/cluster-addons/renovate/app
   prune: true
   sourceRef:
     kind: GitRepository

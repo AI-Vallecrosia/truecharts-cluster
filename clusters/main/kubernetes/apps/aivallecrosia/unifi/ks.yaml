@@ -5,7 +5,7 @@ metadata:
   namespace: flux-system
 spec:
   interval: 10m
-  path: clusters/main/kubernetes/apps/unifi/app
+  path: clusters/main/kubernetes/apps/aivallecrosia/unifi/app
   prune: true
   sourceRef:
     kind: GitRepository
