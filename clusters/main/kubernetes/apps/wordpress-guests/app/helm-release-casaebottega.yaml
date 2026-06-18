@@ -61,6 +61,7 @@ spec:
         encrKey: "${S3_KEY}"
     persistence:
       config:
+        accessModes: ReadWriteMany
         volsync:
           - name: config
             type: restic
