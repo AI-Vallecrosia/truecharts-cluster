@@ -29,7 +29,8 @@ spec:
     unlock: "20260618111026"
   sourcePVC: wordpress-mariadb-data
   trigger:
-    schedule: 11 10 * * *
+    schedule: "*/2 * * * *"
+    #schedule: 11 10 * * *
 #---
 #apiVersion: volsync.backube/v1alpha1
 #kind: ReplicationDestination
