@@ -29,7 +29,7 @@ spec:
     unlock: "20260618111026"
   sourcePVC: wordpress-casaebottega-mariadb-data
   trigger:
-    schedule: "*/2 * * * *"
+    schedule: "*22 05 * * *"
 #---
 #apiVersion: volsync.backube/v1alpha1
 #kind: ReplicationDestination
