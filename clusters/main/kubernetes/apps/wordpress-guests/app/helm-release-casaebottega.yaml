@@ -30,6 +30,18 @@ spec:
   uninstall:
     keepHistory: false
   values:
+    podOptions:
+      topologySpreadConstraints:
+      - labelSelector:
+          matchLabels:
+            app.kubernetes.io/instance: wordpress-casaebottega
+            #app.kubernetes.io/name: wordpress
+            #pod.name: main
+        maxSkew: 1
+        nodeAffinityPolicy: Ignore
+        nodeTaintsPolicy: Ignore
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
     workload:
       main:
         replicas: 2
