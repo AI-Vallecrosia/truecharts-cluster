@@ -1,0 +1,110 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: gitea
+  namespace: gitea
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: gitea
+      version: 24.9.1
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 15m
+  timeout: 20m
+  maxHistory: 3
+  driftDetection:
+    mode: enabled
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    service:
+      main:
+        type: LoadBalancer
+        loadBalancerIP: ${DASHBOARD_IP}
+        ports:
+          main:
+            port: 80
+    ingress:
+      main:
+        ingressClassName: internal
+        enabled: true
+        hosts:
+         - host: gitea.cloud.local
+    credentials:
+      s3:
+        type: s3
+        url: "${S3_ENDPOINT}"
+        bucket: "${S3_BUCKET}"
+        accessKey: "${S3_ID}"
+        secretKey: "${S3_KEY}"
+        encrKey: "${S3_KEY}"
+    persistence:
+      data:
+        volsync:
+        - name: data
+          type: restic
+          credentials: s3
+          cleanupTempPvc: true
+          cleanupCachePvc: true
+          dest:
+            enabled: true
+          src:
+            pruneIntervalDays: 7
+            trigger:
+              schedule: "50 02 * * *"
+            retain:
+              hourly: 5
+              daily: 5
+              weekly: 1
+              monthly: 1
+              yearly: 1
+            enabled: true
+      # varlib:
+      #   enabled: true
+      #   mountPath: "/var/lib/gitea"
+      #   type: emptyDir
+    admin:
+      # existingSecret: gitea-admin-secret
+      username: admin
+      password: ${GITEA_ADMIN_PASSWORD}
+      email: "${ADMIN_EMAIL}"
+      passwordMode: keepUpdated  # Options: initialOnlyNoReset, initialOnlyRequireReset, or keepUpdated
+
+    # Enabled postgres
+    cnpg:
+      main:
+        cluster:
+          postgresql:
+              max_slot_wal_keep_size: 5GB
+              wal_compression: lz4
+          instances: 3
+          env:
+            AWS_REQUEST_CHECKSUM_CALCULATION: when_required
+            AWS_RESPONSE_CHECKSUM_VALIDATION: when_required
+          walStorage:
+            size: "100Gi"
+        # mode: recovery
+        backups:
+          # revision: ""
+          enabled: true
+          credentials: s3
+        recovery:
+          enabled: true
+          # pitrTarget:
+          #   time: "2026-06-10T05:00:00Z"
+          #revision: "3"
+          credentials: s3
+

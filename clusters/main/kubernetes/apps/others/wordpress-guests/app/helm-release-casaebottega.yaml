@@ -46,7 +46,7 @@ spec:
         whenUnsatisfiable: DoNotSchedule
     workload:
       main:
-        replicas: 2
+        replicas: 1
     php-config:
       PHP_MEMORY_LIMIT: "2048M"
       PHP_POST_MAX_SIZE: "2048M"
@@ -84,7 +84,7 @@ spec:
     mariadb:
       workload:
         main:
-          replicas: 2
+          replicas: 1
     ingress:
       wordpress:
         enabled: true
