@@ -33,7 +33,7 @@ spec:
     persistence:
       config:
         type: nfs
-        path: /mnt/AI_Storage/Deployments/freeports/www
+        path: /mnt/AI_SSD/Deployments/freeports/www
         server: "10.0.10.10"
     ingress:
       main:
