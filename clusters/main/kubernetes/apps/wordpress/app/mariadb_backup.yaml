@@ -55,19 +55,19 @@ spec:
 #    repository: wordpress-mariadb-data-volsync-config
 #  trigger:
 #    manual: restore-once
-#---
-#apiVersion: v1
-#kind: Secret
-#metadata:
-#  namespace: wordpress
-#  name: wordpress-mariadb-data-volsync-config
-#type: Opaque
-#stringData:
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: wordpress
+  name: wordpress-mariadb-data-volsync-config
+type: Opaque
+stringData:
   # The repository url
-#  RESTIC_REPOSITORY: s3:http://minio.minio.svc.cluster.local:9000/restic-repo
+  RESTIC_REPOSITORY: s3:${S3_ENDPOINT}/${S3_BUCKET}/wordpress/volsync/mariadb-data
   # The repository encryption key
-#  RESTIC_PASSWORD: my-secure-restic-password
+  RESTIC_PASSWORD: ${S3_KEY}
   # ENV vars specific to the chosen back end
   # https://restic.readthedocs.io/en/stable/030_preparing_a_new_repo.html
-#  AWS_ACCESS_KEY_ID: access
-#  AWS_SECRET_ACCESS_KEY: password
+  AWS_ACCESS_KEY_ID: ${S3_ID}
+  AWS_SECRET_ACCESS_KEY: ${S3_KEY}
