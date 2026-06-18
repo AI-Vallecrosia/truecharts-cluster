@@ -26,6 +26,20 @@ spec:
       retries: 3
   timeout: 20m
   values:
+    podOptions:
+      defaultAffinity: false
+      defaultSpread: false
+      topologySpreadConstraints:
+      - labelSelector:
+          matchLabels:
+            app.kubernetes.io/instance: nextcloud
+            #app.kubernetes.io/name: wordpress
+            #pod.name: main
+        maxSkew: 1
+        nodeAffinityPolicy: Ignore
+        nodeTaintsPolicy: Ignore
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
     workload:
       main:
         replicas: 2
@@ -158,6 +172,7 @@ spec:
         encrKey: "${S3_KEY}"
     persistence:
       html:
+        accessModes: [ReadWriteMany]
         volsync:
           - name: html
             type: restic
@@ -178,6 +193,7 @@ spec:
                 yearly: 1
               enabled: true
       config:
+        accessModes: [ReadWriteMany]
         volsync:
           - name: config
             type: restic
