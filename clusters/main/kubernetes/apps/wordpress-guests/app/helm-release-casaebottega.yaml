@@ -69,7 +69,7 @@ spec:
             cleanupTempPvc: true
             cleanupCachePvc: true
             dest:
-             enabled: false
+             enabled: true
             src:
               pruneIntervalDays: 7
               trigger:
