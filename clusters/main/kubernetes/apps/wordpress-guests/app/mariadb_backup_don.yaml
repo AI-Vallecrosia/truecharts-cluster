@@ -3,11 +3,11 @@ apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
   labels:
-    app.kubernetes.io/instance: wordpress
-    app.kubernetes.io/name: wordpress
-    release: wordpress
-  name: wordpress-mariadb-data-data-src
-  namespace: wordpress
+    app.kubernetes.io/instance: wordpress-don
+    app.kubernetes.io/name: wordpress-don
+    release: wordpress-don
+  name: wordpress-don-mariadb-data-data-src
+  namespace: wordpress-guests
 spec:
   restic:
     accessModes:
@@ -19,7 +19,7 @@ spec:
       runAsGroup: 0
       runAsUser: 568
     pruneIntervalDays: 7
-    repository: wordpress-mariadb-data-volsync-config
+    repository: wordpress-don-mariadb-data-volsync-config
     retain:
       daily: 5
       hourly: 5
@@ -27,7 +27,7 @@ spec:
       weekly: 1
       yearly: 1
     unlock: "20260618111026"
-  sourcePVC: wordpress-mariadb-data
+  sourcePVC: wordpress-don-mariadb-data
   trigger:
     schedule: "11 10 * * *"
 #---
@@ -35,10 +35,10 @@ spec:
 #kind: ReplicationDestination
 #metadata:
 #  labels:
-#    app.kubernetes.io/instance: wordpress
-#    release: wordpress
-#    name: wordpress-mariadb-data-data-dest
-#    namespace: wordpress
+#    app.kubernetes.io/instance: wordpress-don
+#    release: wordpress-don
+#    name: wordpress-don-mariadb-data-data-dest
+#    namespace: wordpress-guests
 #spec:
 #  restic:
 #    accessModes:
@@ -52,19 +52,19 @@ spec:
 #      fsGroup: 568
 #      runAsGroup: 0
 #      runAsUser: 568
-#    repository: wordpress-mariadb-data-volsync-config
+#    repository: wordpress-don-mariadb-data-volsync-config
 #  trigger:
 #    manual: restore-once
 ---
 apiVersion: v1
 kind: Secret
 metadata:
-  namespace: wordpress
-  name: wordpress-mariadb-data-volsync-config
+  namespace: wordpress-guests
+  name: wordpress-don-mariadb-data-volsync-config
 type: Opaque
 stringData:
   # The repository url
-  RESTIC_REPOSITORY: s3:${S3_ENDPOINT}/${S3_BUCKET}/wordpress/volsync/mariadb-data
+  RESTIC_REPOSITORY: s3:${S3_ENDPOINT}/${S3_BUCKET}/wordpress-don/volsync/mariadb-data
   # The repository encryption key
   RESTIC_PASSWORD: ${S3_KEY}
   # ENV vars specific to the chosen back end

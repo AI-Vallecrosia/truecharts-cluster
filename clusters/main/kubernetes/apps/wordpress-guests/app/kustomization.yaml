@@ -4,3 +4,5 @@ resources:
   - namespace.yaml
   - helm-release-don.yaml
   - helm-release-casaebottega.yaml
+  - mariadb_backup_casaebottega.yaml
+  - mariadb_backup_don.yaml
