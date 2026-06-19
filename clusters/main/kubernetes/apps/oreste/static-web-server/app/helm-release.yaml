@@ -41,5 +41,6 @@ spec:
         enabled: true
         hosts:
          - host: www.freeports.cloud.local
+         
 
 
