@@ -37,10 +37,11 @@ spec:
         server: "10.0.10.10"
     ingress:
       main:
-        ingressClassName: internal
+        ingressClassName: external
         enabled: true
         hosts:
-         - host: www.freeports.cloud.local
+        - host: www.freeports.aivallecrosia.com
+        - host: www.freeports.org
          
 
 

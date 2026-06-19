@@ -46,10 +46,11 @@ spec:
             port: 80
     ingress:
       main:
-        ingressClassName: internal
+        ingressClassName: external
         enabled: true
         hosts:
-         - host: gitea.cloud.local
+        - host: gitea.aivallecrosia.com
+        - host: gitea.freeports.org
     credentials:
       s3:
         type: s3
