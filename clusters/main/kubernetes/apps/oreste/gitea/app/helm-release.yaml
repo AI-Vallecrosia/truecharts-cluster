@@ -36,7 +36,7 @@ spec:
           containers:
             main:
               env:
-                GITEA_service_DISABLE_REGISTRATION: true
+                GITEA__service__DISABLE_REGISTRATION: true
     service:
       main:
         type: LoadBalancer
