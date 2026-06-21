@@ -45,14 +45,7 @@ spec:
         replicas: 2
       nginx:
         replicas: 2
-#     podOptions:
-      runtimeClassName: "nvidia"
-      containers:
-       main:
-        resources:
-         limits:
-           nvidia.com/gpu: 1
-           
+#     podOptions:     
 #     resources:
 #      limits:
 #        nvidia.com/gpu: 1
