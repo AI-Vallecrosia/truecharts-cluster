@@ -42,14 +42,13 @@ spec:
         whenUnsatisfiable: DoNotSchedule
     workload:
       main:
-        replicas: 1
         podSpec:
          runtimeClassName: "nvidia"
-        resources:
-          requests:
-            nvidia.com/gpu: 1
-          limits:
-            nvidia.com/gpu: 1
+         containers:
+          main:
+            resources:
+              limits:
+                nvidia.com/gpu: 1
       nginx:
         replicas: 2   
 
@@ -83,11 +82,11 @@ spec:
         nextcloud:
           podSpec:
             runtimeClassName: "nvidia"
-          resources:
-            requests:
-              nvidia.com/gpu: 1
-            limits:
-              nvidia.com/gpu: 1
+          containers:
+            main:
+              resources:
+                limits:
+                  nvidia.com/gpu: 1
       php:
         memory_limit: 10G
         upload_limit: 100G
