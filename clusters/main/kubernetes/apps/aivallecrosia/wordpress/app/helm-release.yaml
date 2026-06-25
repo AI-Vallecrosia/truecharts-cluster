@@ -1,0 +1,91 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: wordpress
+  namespace: wordpress
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: wordpress
+      version: 13.6.10
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 15m
+  timeout: 20m
+  maxHistory: 3
+  driftDetection:
+    mode: enabled
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+  values:
+    workload:
+      main:
+        replicas: 1
+    credentials:
+      s3:
+        type: s3
+        url: "${S3_ENDPOINT}"
+        bucket: "${S3_BUCKET}"
+        accessKey: "${S3_ID}"
+        secretKey: "${S3_KEY}"
+        encrKey: "${S3_KEY}"
+    persistence:
+      config:
+        volsync:
+          - name: config
+            type: restic
+            credentials: s3
+            cleanupTempPvc: true
+            cleanupCachePvc: true
+            dest:
+             enabled: false
+            src:
+              pruneIntervalDays: 7
+              trigger:
+                schedule: "02 14 * * *"
+              retain:
+                hourly: 5
+                daily: 5
+                weekly: 1
+                monthly: 1
+                yearly: 1
+              enabled: true
+    mariadb:
+      workload:
+        main:
+          replicas: 1
+    ingress:
+      wordpress:
+        enabled: true
+        primary: true
+        ingressClassName: external
+        hosts:
+          - host: "www.${DOMAIN_0}"
+            paths:
+              - path: /
+          - host: "${DOMAIN_0}"
+            paths:
+              - path: /
+          # host: wordpress.cloud.local
+          #  paths:
+          #    - path: /
+        tls:
+          - hosts:
+              - "www.${DOMAIN_0}"
+              - "${DOMAIN_0}"
+           #   - wordpress.cloud.local
+        integrations:
+          traefik:
+            enabled: false

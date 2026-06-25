@@ -1,0 +1,241 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: frigate
+  namespace: frigate
+spec:
+  interval: 15m
+  chart:
+    spec:
+      chart: frigate
+      version: 19.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 15m
+  timeout: 20m
+  maxHistory: 3
+  driftDetection:
+    mode: enabled
+  install:
+    createNamespace: true
+    remediation:
+      retries: 3
+  upgrade:
+    cleanupOnFail: true
+    remediation:
+      retries: 3
+  uninstall:
+    keepHistory: false
+
+  values:
+    workload:
+      main:
+        podSpec:
+          runtimeClassName: "nvidia"
+          containers:
+            main:
+              resources:
+                limits:
+                  nvidia.com/gpu: 1
+    frigateConfig:
+      ffmpeg:
+        hwaccel_args: preset-nvidia
+      mqtt:
+        enabled: False
+      #detectors:
+      #  onnx:
+      #    type: onnx
+      cameras:
+        magazzino_ext:
+          enabled: False
+          ffmpeg:
+            inputs:
+              - path: "rtsp://${CAMERA_MAGAZZINO_EXT_USR}:${CAMERA_MAGAZZINO_EXT_PSWD}@${CAMERA_MAGAZZINO_EXT_IP}/streaming/channels/101"
+                roles:
+                  - record
+              - path: "rtsp://${CAMERA_MAGAZZINO_EXT_USR}:${CAMERA_MAGAZZINO_EXT_PSWD}@${CAMERA_MAGAZZINO_EXT_IP}/streaming/channels/102"
+                roles:
+                  - detect
+          detect:
+            width: 640
+            height: 360
+          onvif:
+            host: "${CAMERA_MAGAZZINO_EXT_IP}"
+            port: 8000
+            user: "${CAMERA_MAGAZZINO_EXT_USR_ONVIF}"
+            password: "${CAMERA_MAGAZZINO_EXT_PSWD_ONVIF}"
+        ufficio:
+          enabled: True
+          ffmpeg:
+            inputs:
+              - path: "rtsp://${CAMERA_UFFICIO_USR}:${CAMERA_UFFICIO_PSWD}@${CAMERA_UFFICIO_IP}/streaming/channels/101"
+                roles:
+                  - record
+              - path: "rtsp://${CAMERA_UFFICIO_USR}:${CAMERA_UFFICIO_PSWD}@${CAMERA_UFFICIO_IP}/streaming/channels/102"
+                roles:
+                  - detect
+          webui_url: "https://${CAMERA_UFFICIO_USR}/doc/index.html"
+          detect:
+            width: 640
+            height: 360
+          onvif:
+            host: "${CAMERA_UFFICIO_IP}"
+            port: 8000
+            user: "${CAMERA_UFFICIO_USR_ONVIF}"
+            password: "${CAMERA_UFFICIO_PSWD_ONVIF}"
+          motion:
+            mask:
+              - "0.718,0,0.682,0.468,0.43,0.37,0.426,0"
+              - "0.025,0.056,0.311,0.057,0.313,0.091,0.023,0.093"
+        citofono:
+          enabled: True
+          ffmpeg:
+            inputs:
+              - path: "rtsp://${CAMERA_CITOFONO_USR}:${CAMERA_CITOFONO_PSWD}@${CAMERA_CITOFONO_IP}/streaming/channels/101"
+                roles:
+                  - record
+              - path: "rtsp://${CAMERA_CITOFONO_USR}:${CAMERA_CITOFONO_PSWD}@${CAMERA_CITOFONO_IP}/streaming/channels/102"
+                roles:
+                  - detect
+          webui_url: "http://${CAMERA_CITOFONO_USR}/doc/index.html"
+          motion:
+            mask:
+              - "0.09,0.054,0.21,0.036,0.25,0.218,0.334,0.284,0.366,0.405,0.315,0.473,0.22,0.396,0.071,0.491,0,0.374,0.02,0.144"
+              - "0.366,0.264,0.423,0.164,0.569,0.188,0.604,0.332,0.532,0.5,0.417,0.507"
+              - "0.884,0.521,0.872,0.441,0.903,0.405,0.854,0.269,0.907,0.157,0.977,0.169,1,0.346,0.999,0.513"
+        magazzino_int:
+          enabled: true
+          ffmpeg:
+            inputs:
+              - path: "rtsp://${CAMERA_MAGAZZINO_INT_USR}:${CAMERA_MAGAZZINO_INT_PSWD}@${CAMERA_MAGAZZINO_INT_IP}:554/h265Preview_01_main"
+                input_args: preset-rtsp-generic
+                roles:
+                  - record
+              - path: "rtsp://${CAMERA_MAGAZZINO_INT_USR}:${CAMERA_MAGAZZINO_INT_PSWD}@${CAMERA_MAGAZZINO_INT_IP}:554/h265Preview_01_sub"
+                input_args: preset-rtsp-generic
+                roles:
+                  - detect
+          webui_url: "https://${CAMERA_MAGAZZINO_INT_USR}/index.html"
+          detect:
+            width: 640
+            height: 360
+          onvif:
+            host: "${CAMERA_MAGAZZINO_INT_IP}"
+            port: 8000
+            user: "${CAMERA_MAGAZZINO_INT_USR_ONVIF}"
+            password: "${CAMERA_MAGAZZINO_INT_PSWD_ONVIF}"
+          motion:
+            mask:
+              - "0.35,0.028,0.64,0.028,0.641,0.063,0.348,0.063"
+        parcheggio:
+          enabled: true
+          ffmpeg:
+            inputs:
+              - path: "rtsp://${CAMERA_PARCHEGGIO_USR}:${CAMERA_PARCHEGGIO_PSWD}@${CAMERA_PARCHEGGIO_IP}:554/h265Preview_01_main"
+                input_args: preset-rtsp-generic
+                roles:
+                  - record
+              - path: "rtsp://${CAMERA_PARCHEGGIO_USR}:${CAMERA_PARCHEGGIO_PSWD}@${CAMERA_PARCHEGGIO_IP}:554/h265Preview_01_sub"
+                input_args: preset-rtsp-generic
+                roles:
+                  - detect
+          webui_url: "https://${CAMERA_PARCHEGGIO_USR}/index.html"
+          detect:
+            width: 640
+            height: 360
+          onvif:
+            host: "${CAMERA_PARCHEGGIO_IP}"
+            port: 8000
+            user: "${CAMERA_PARCHEGGIO_USR_ONVIF}"
+            password: "${CAMERA_PARCHEGGIO_PSWD_ONVIF}"
+          #motion:
+          #  mask:
+          #    - "0.35,0.028,0.64,0.028,0.641,0.063,0.348,0.063"
+      record:
+        enabled: true
+        continuous:
+          days: 2
+        motion:
+          days: 7
+        alerts:
+          retain:
+            days: 200
+            mode: all
+        detections:
+          retain:
+            days: 50
+            mode: all
+      snapshots:
+        enabled: True
+        timestamp: True
+        retain:
+          default: 10
+          objects:
+            person: 30
+      birdseye:
+        enabled: True
+        mode: continuous
+      camera_groups:
+        AI_Vallecrosia:
+          order: 1
+          icon: LuAperture
+          cameras: [ufficio,citofono]
+
+    credentials:
+      s3:
+        type: s3
+        url: "${S3_ENDPOINT}"
+        bucket: "${S3_BUCKET}"
+        accessKey: "${S3_ID}"
+        secretKey: "${S3_KEY}"
+        encrKey: "${S3_KEY}"
+    service:
+      main:
+        enabled: true
+        type: LoadBalancer
+        loadBalancerIP: 10.0.10.66
+      
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: internal
+        hosts:
+          - host: frigate.cloud.local
+            paths:
+              - path: /
+        tls:
+          - hosts:
+              - frigate.cloud.local
+        integrations:
+          traefik:
+            enabled: false
+    persistence:
+      config:
+        volsync:
+          - name: config
+            type: restic
+            credentials: s3
+            cleanupTempPvc: true
+            cleanupCachePvc: true
+            dest:
+             enabled: true
+            src:
+              pruneIntervalDays: 7
+              trigger:
+                schedule: "57 12 * * *"
+              retain:
+                hourly: 5
+                daily: 5
+                weekly: 1
+                monthly: 1
+                yearly: 1
+              enabled: true
+      media:
+        enabled: true
+        type: nfs 
+        mountPath: /media
+        path: /mnt/DVR/Frigate-Recordings
+        server: "10.0.10.10"

@@ -1,0 +1,73 @@
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  labels:
+    app.kubernetes.io/instance: wordpress-casaebottega
+    app.kubernetes.io/name: wordpress-casaebottega
+    release: wordpress-casaebottega
+  name: wordpress-casaebottega-mariadb-data-data-src
+  namespace: wordpress-guests
+spec:
+  restic:
+    accessModes:
+    - ReadWriteOnce
+    cacheCapacity: 10Gi
+    copyMethod: Snapshot
+    moverSecurityContext:
+      fsGroup: 568
+      runAsGroup: 0
+      runAsUser: 568
+    pruneIntervalDays: 7
+    repository: wordpress-casaebottega-mariadb-data-volsync-config
+    retain:
+      daily: 5
+      hourly: 5
+      monthly: 1
+      weekly: 1
+      yearly: 1
+    unlock: "20260618111026"
+  sourcePVC: wordpress-casaebottega-mariadb-data
+  trigger:
+    schedule: "*22 05 * * *"
+#---
+#apiVersion: volsync.backube/v1alpha1
+#kind: ReplicationDestination
+#metadata:
+#  labels:
+#    app.kubernetes.io/instance: wordpress-casaebottega
+#    release: wordpress-casaebottega
+#    name: wordpress-casaebottega-mariadb-data-data-dest
+#    namespace: wordpress-guests
+#spec:
+#  restic:
+#    accessModes:
+#    - ReadWriteOnce
+#    cacheCapacity: 10Gi
+#    capacity: 100Gi
+#    cleanupCachePVC: true
+#    cleanupTempPVC: true
+#    copyMethod: Snapshot
+#    moverSecurityContext:
+#      fsGroup: 568
+#      runAsGroup: 0
+#      runAsUser: 568
+#    repository: wordpress-casaebottega-mariadb-data-volsync-config
+#  trigger:
+#    manual: restore-once
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: wordpress-guests
+  name: wordpress-casaebottega-mariadb-data-volsync-config
+type: Opaque
+stringData:
+  # The repository url
+  RESTIC_REPOSITORY: s3:${S3_ENDPOINT}/${S3_BUCKET}/wordpress-casaebottega/volsync/mariadb-data
+  # The repository encryption key
+  RESTIC_PASSWORD: ${S3_KEY}
+  # ENV vars specific to the chosen back end
+  # https://restic.readthedocs.io/en/stable/030_preparing_a_new_repo.html
+  AWS_ACCESS_KEY_ID: ${S3_ID}
+  AWS_SECRET_ACCESS_KEY: ${S3_KEY}

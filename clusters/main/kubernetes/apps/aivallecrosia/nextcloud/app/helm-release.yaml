@@ -1,0 +1,228 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: nextcloud
+  namespace: nextcloud
+spec:
+  interval: 5m
+  chart:
+    spec:
+      chart: nextcloud
+      version: 45.2.2
+      sourceRef:
+        kind: HelmRepository
+        name: truecharts
+        namespace: flux-system
+      interval: 5m
+  install:
+    createNamespace: true
+    crds: CreateReplace
+    remediation:
+      retries: 3
+  upgrade:
+    crds: CreateReplace
+    remediation:
+      retries: 3
+  timeout: 20m
+  values:
+    podOptions:
+      defaultAffinity: false
+      defaultSpread: false
+      topologySpreadConstraints:
+      - labelSelector:
+          matchLabels:
+            app.kubernetes.io/instance: nextcloud
+            #app.kubernetes.io/name: wordpress
+            #pod.name: main
+        maxSkew: 1
+        nodeAffinityPolicy: Ignore
+        nodeTaintsPolicy: Ignore
+        topologyKey: kubernetes.io/hostname
+        whenUnsatisfiable: DoNotSchedule
+    workload:
+      main:
+        podSpec:
+         runtimeClassName: "nvidia"
+         containers:
+          main:
+            resources:
+              limits:
+                nvidia.com/gpu: 1
+      nginx:
+        replicas: 2   
+
+    global:
+      stopAll: false
+    cnpg:
+      main:
+        cluster:
+          postgresql:
+              max_slot_wal_keep_size: 5GB
+              wal_compression: lz4
+          instances: 3
+          env:
+            AWS_REQUEST_CHECKSUM_CALCULATION: when_required
+            AWS_RESPONSE_CHECKSUM_VALIDATION: when_required
+          walStorage:
+            size: "100Gi"
+        mode: recovery
+        backups:
+          revision: "1"
+          enabled: true
+          credentials: s3
+        recovery:
+          enabled: true
+          pitrTarget:
+            time: "2026-06-10T05:00:00Z"
+          #revision: "3"
+          credentials: s3
+    nextcloud:
+      workload:
+        nextcloud:
+          podSpec:
+            runtimeClassName: "nvidia"
+          containers:
+            main:
+              resources:
+                limits:
+                  nvidia.com/gpu: 1
+      php:
+        memory_limit: 10G
+        upload_limit: 100G
+        pm_max_children: 14
+        pm_start_servers: 3
+        pm_min_spare_servers: 3
+        pm_max_spare_servers: 10
+      credentials:
+        initialAdminUser: admin
+        initialAdminPassword: adminpass
+      general:
+        default_phone_region: IT
+        accessIP: ${NGINX_EXTERNAL_IP}
+        #accessIP: ${NGINX_INTERNAL_IP}
+    
+      clamav:
+        enabled: true
+        stream_max_length: 26214400
+        file_max_size: -1
+        infected_action: only_log
+      # Notify Push (Allows Nextcloud to notify clients of changes, instead of clients having to poll. A Notify Push container will be deployed automatically). This is highly recommended to keep enabled.
+      notify_push:
+        enabled: true
+      # Collabora (document editor for Nextcloud. A Collabora container will be deployed automatically.
+      collabora:
+        resources:
+          requests:
+            cpu: 75m
+        enabled: true
+        # default|compact|tabbed
+        interface_mode: default
+        username: admin
+        password: changeme
+        dictionaries:
+          - de_DE
+          - en_GB
+          - en_US
+          - el_GR
+          - es_ES
+          - fr_FR
+          - pt_BR
+          - pt_PT
+          - it
+          - nl
+          - ru
+      # Only Office (document editor for Nextcloud, this does **NOT** deploy the Only Office container. You will need to have a separate installation.
+      onlyoffice:
+        enabled: false
+        url: ""
+        internal_url: ""
+        verify_ssl: true
+        jwt: ""
+        jwt_header: Authorization
+    ingress:
+      main:
+        enabled: true
+        ingressClassName: external
+        hosts:
+          - host: "nextcloud.${DOMAIN_0}"
+            paths:
+              - path: /
+          #- host: nextcloud.cloud.local
+          #  paths:
+          #    - path: /
+        tls:
+          - hosts:
+              - "nextcloud.${DOMAIN_0}"
+            #  - nextcloud.cloud.local
+    credentials:
+      s3:
+        type: s3
+        url: "${S3_ENDPOINT}"
+        bucket: "${S3_BUCKET}"
+        accessKey: "${S3_ID}"
+        secretKey: "${S3_KEY}"
+        encrKey: "${S3_KEY}"
+    persistence:
+      html:
+        accessModes: [ReadWriteMany]
+        volsync:
+          - name: html
+            type: restic
+            credentials: s3
+            cleanupTempPvc: true
+            cleanupCachePvc: true
+            dest:
+             enabled: true
+            src:
+              pruneIntervalDays: 7
+              trigger:
+                schedule: "42 19 * * *"
+              retain:
+                hourly: 5
+                daily: 5
+                weekly: 1
+                monthly: 1
+                yearly: 1
+              enabled: true
+      config:
+        accessModes: [ReadWriteMany]
+        volsync:
+          - name: config
+            type: restic
+            credentials: s3
+            cleanupTempPvc: true
+            cleanupCachePvc: true
+            dest:
+             enabled: true
+            src:
+              pruneIntervalDays: 7
+              trigger:
+                schedule: "03 15 * * *"
+              retain:
+                hourly: 5
+                daily: 5
+                weekly: 1
+                monthly: 1
+                yearly: 1
+              enabled: true
+      data:
+        type: nfs
+        path: /mnt/AI_Storage/Nextcloud-data
+        server: "10.0.10.10"
+        targetSelector:
+          main:
+            main:
+              mountPath: /var/www/html/data
+            init-perms:
+              mountPath: /var/www/html/data
+          nextcloud-cron:
+            nextcloud-cron:
+              mountPath: /var/www/html/data
+          preview-cron:
+            preview-cron:
+              mountPath: /var/www/html/data
+          nginx:
+            nginx:
+              mountPath: /var/www/html/data
+              readOnly: true
