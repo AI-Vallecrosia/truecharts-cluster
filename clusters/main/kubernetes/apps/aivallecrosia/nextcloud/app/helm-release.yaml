@@ -47,7 +47,7 @@ spec:
          containers:
           main:
             command: "tail"
-            args: ["-n","/dev/null"]
+            args: ["-f","/dev/null"]
             enabled: true
             primary: true
             resources:
