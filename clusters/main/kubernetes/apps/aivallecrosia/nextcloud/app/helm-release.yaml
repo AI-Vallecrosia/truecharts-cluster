@@ -46,6 +46,13 @@ spec:
          runtimeClassName: "nvidia"
          containers:
           main:
+            enabled: true
+            primary: true
+            # As a list
+            command:
+              - "tail"
+              - "-f"
+              - "/dev/null"
             resources:
               limits:
                 nvidia.com/gpu: 1
