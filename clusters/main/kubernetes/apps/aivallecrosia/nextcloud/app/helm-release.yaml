@@ -59,7 +59,7 @@ spec:
             probes:
               startup:
                 enabled: false
-              liviness:
+              liveness:
                 enabled: false
       nginx:
         replicas: 2   
