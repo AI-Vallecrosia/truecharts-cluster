@@ -49,6 +49,9 @@ spec:
             resources:
               limits:
                 nvidia.com/gpu: 1
+            probes:
+              startup:
+                enabled: false
       nginx:
         replicas: 2   
 
