@@ -46,21 +46,18 @@ spec:
          runtimeClassName: "nvidia"
          containers:
           main:
+            command: "tail"
+            args: ["-n","/dev/null"]
             enabled: true
             primary: true
-            # As a list
-            command:
-              - "tail"
-              - "-f"
-              - "/dev/null"
             resources:
               limits:
                 nvidia.com/gpu: 1
             probes:
               startup:
                 enabled: false
-              liveness:
-                enabled: false
+#              liveness:
+#                enabled: false
       nginx:
         replicas: 2   
 
