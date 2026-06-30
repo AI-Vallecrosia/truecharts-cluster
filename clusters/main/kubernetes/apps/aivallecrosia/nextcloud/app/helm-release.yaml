@@ -48,14 +48,16 @@ spec:
           main:
             enabled: true
             primary: true
+            command: "tail"
+            args: ["-f","/dev/null"]
             resources:
               limits:
                 nvidia.com/gpu: 1
             probes:
-#              startup:
-#                enabled: false
-#              liveness:
-#                enabled: false
+              startup:
+                enabled: false
+              liveness:
+                enabled: false
 #              readiness:
 #                enabled: false
 
