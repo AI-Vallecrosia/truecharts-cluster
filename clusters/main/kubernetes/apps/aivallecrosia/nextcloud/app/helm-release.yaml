@@ -54,8 +54,8 @@ spec:
               limits:
                 nvidia.com/gpu: 1
             probes:
-              #startup:
-              #  enabled: false
+              startup:
+                enabled: false
               #liveness:
               #  enabled: false
 #              readiness:
