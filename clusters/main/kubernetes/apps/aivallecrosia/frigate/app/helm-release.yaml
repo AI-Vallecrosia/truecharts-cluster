@@ -50,7 +50,7 @@ spec:
       #    type: onnx
       cameras:
         magazzino_ext:
-          enabled: False
+          enabled: True
           ffmpeg:
             inputs:
               - path: "rtsp://${CAMERA_MAGAZZINO_EXT_USR}:${CAMERA_MAGAZZINO_EXT_PSWD}@${CAMERA_MAGAZZINO_EXT_IP}/streaming/channels/101"
