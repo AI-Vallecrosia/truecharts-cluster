@@ -60,7 +60,7 @@ spec:
                 roles:
                   - detect
           detect:
-            width: 640
+            width: 64
             height: 360
           onvif:
             host: "${CAMERA_MAGAZZINO_EXT_IP}"
