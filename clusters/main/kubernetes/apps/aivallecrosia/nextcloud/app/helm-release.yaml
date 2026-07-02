@@ -9,7 +9,7 @@ spec:
   chart:
     spec:
       chart: nextcloud
-      version: 45.2.2
+      version: 46.0.5
       sourceRef:
         kind: HelmRepository
         name: truecharts
@@ -42,26 +42,32 @@ spec:
         whenUnsatisfiable: DoNotSchedule
     workload:
       main:
-        replicas: 2
+        podSpec:
+         runtimeClassName: "nvidia"
+         containers:
+          main:
+            enabled: true
+            primary: true
+            #command: "tail"
+            #args: ["-f","/dev/null"]
+            resources:
+              limits:
+                nvidia.com/gpu: 1
+            probes:
+              startup:
+                enabled: false
+              #liveness:
+              #  enabled: false
+#              readiness:
+#                enabled: false
+
       nginx:
-        replicas: 2
-#     podOptions:     
-#     resources:
-#      limits:
-#        nvidia.com/gpu: 1
-    # workload:
-    #   main:
-    #     podSpec:
-    #       runtimeClassName: "nvidia"
-    #       containers:
-    #         main:
-    #           resources:
-    #             limits:
-    #               memory: 11000Mi
-    #             requests:
-    #               memory: 1000Mi
+        replicas: 2   
+
     global:
       stopAll: false
+#    redis: 
+#      enabled: false
     cnpg:
       main:
         cluster:
@@ -86,13 +92,15 @@ spec:
           #revision: "3"
           credentials: s3
     nextcloud:
-      resources:
-        requests:
-          cpu: 75m
-#      workload:
-#        nextcloud:
-#          podSpec:
-#            runtimeClassName: "nvidia"
+      workload:
+        nextcloud:
+          podSpec:
+            runtimeClassName: "nvidia"
+          containers:
+            main:
+              resources:
+                limits:
+                  nvidia.com/gpu: 1
       php:
         memory_limit: 10G
         upload_limit: 100G
