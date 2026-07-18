@@ -33,7 +33,7 @@ spec:
     services:
       xmpp:
         type: "LoadBalancer"
-        loadBalancerIP: "10.0.10.108"
+        loadBalancerIP: "10.0.30.108"
         integrations:
           metallb:
             enabled: true

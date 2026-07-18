@@ -42,20 +42,20 @@ spec:
         whenUnsatisfiable: DoNotSchedule
     workload:
       main:
-        podSpec:
-         runtimeClassName: "nvidia"
-         containers:
-          main:
-            enabled: true
-            primary: true
-            #command: "tail"
-            #args: ["-f","/dev/null"]
-            resources:
-              limits:
-                nvidia.com/gpu: 1
-            probes:
-              startup:
-                enabled: false
+        # podSpec:
+        #  runtimeClassName: "nvidia"
+        #  containers:
+        #   main:
+        #     enabled: true
+        #     primary: true
+        #     #command: "tail"
+        #     #args: ["-f","/dev/null"]
+        #     resources:
+        #       limits:
+        #         nvidia.com/gpu: 1
+        #     probes:
+        #       startup:
+        #         enabled: false
               #liveness:
               #  enabled: false
 #              readiness:
@@ -87,20 +87,20 @@ spec:
           credentials: s3
         recovery:
           enabled: true
-          pitrTarget:
-            time: "2026-06-10T05:00:00Z"
+          # pitrTarget:
+            # time: "2026-06-10T05:00:00Z"
           #revision: "3"
           credentials: s3
     nextcloud:
-      workload:
-        nextcloud:
-          podSpec:
-            runtimeClassName: "nvidia"
-          containers:
-            main:
-              resources:
-                limits:
-                  nvidia.com/gpu: 1
+      # workload:
+      #   nextcloud:
+      #     podSpec:
+      #       runtimeClassName: "nvidia"
+      #     containers:
+      #       main:
+      #         resources:
+      #           limits:
+      #             nvidia.com/gpu: 1
       php:
         memory_limit: 10G
         upload_limit: 100G
@@ -223,7 +223,7 @@ spec:
       data:
         type: nfs
         path: /mnt/AI_Storage/Nextcloud-data
-        server: "10.0.10.10"
+        server: "${TRUENAS_IP}"
         targetSelector:
           main:
             main:

@@ -41,50 +41,50 @@ nodes:
             gateway: ${GATEWAY}
         vip:
           ip: ${VIP}
-    schematic:
-      customization:
-        systemExtensions:
-          officialExtensions:
-            - siderolabs/nonfree-kmod-nvidia-lts
-            - siderolabs/nvidia-container-toolkit-lts
-    patches:
-      - "@./patches/nvidia.yaml"
-  - hostname: k8s-control-2
-    ipAddress: ${MASTER2IP_IP}
-    controlPlane: true
-    nameservers:
-      - ${GATEWAY}
-    installDiskSelector:
-      size: <= 1600GB
-    networkInterfaces:
-      # suffix is the adapter mac adres.
-      - deviceSelector:
-          hardwareAddr: "${MASTER2IP_MAC}"
-        addresses:
-          - ${MASTER2IP_CIDR}
-        routes:
-          - network: 0.0.0.0/0
-            gateway: ${GATEWAY}
-        vip:
-          ip: ${VIP}
-  - hostname: k8s-control-3
-    ipAddress: ${MASTER3IP_IP}
-    controlPlane: true
-    nameservers:
-      - ${GATEWAY}
-    installDiskSelector:
-      size: <= 1600GB
-    networkInterfaces:
-      # suffix is the adapter mac adres.
-      - deviceSelector:
-          hardwareAddr: "${MASTER3IP_MAC}"
-        addresses:
-          - ${MASTER3IP_CIDR}
-        routes:
-          - network: 0.0.0.0/0
-            gateway: ${GATEWAY}
-        vip:
-          ip: ${VIP}
+    # schematic:
+    #   customization:
+    #     systemExtensions:
+    #       officialExtensions:
+    #         - siderolabs/nonfree-kmod-nvidia-lts
+    #         - siderolabs/nvidia-container-toolkit-lts
+    # patches:
+    #   - "@./patches/nvidia.yaml"
+  # - hostname: k8s-control-2
+  #   ipAddress: ${MASTER2IP_IP}
+  #   controlPlane: true
+  #   nameservers:
+  #     - ${GATEWAY}
+  #   installDiskSelector:
+  #     size: <= 1600GB
+  #   networkInterfaces:
+  #     # suffix is the adapter mac adres.
+  #     - deviceSelector:
+  #         hardwareAddr: "${MASTER2IP_MAC}"
+  #       addresses:
+  #         - ${MASTER2IP_CIDR}
+  #       routes:
+  #         - network: 0.0.0.0/0
+  #           gateway: ${GATEWAY}
+  #       vip:
+  #         ip: ${VIP}
+  # - hostname: k8s-control-3
+  #   ipAddress: ${MASTER3IP_IP}
+  #   controlPlane: true
+  #   nameservers:
+  #     - ${GATEWAY}
+  #   installDiskSelector:
+  #     size: <= 1600GB
+  #   networkInterfaces:
+  #     # suffix is the adapter mac adres.
+  #     - deviceSelector:
+  #         hardwareAddr: "${MASTER3IP_MAC}"
+  #       addresses:
+  #         - ${MASTER3IP_CIDR}
+  #       routes:
+  #         - network: 0.0.0.0/0
+  #           gateway: ${GATEWAY}
+  #       vip:
+  #         ip: ${VIP}
 
 controlPlane:
   patches:
